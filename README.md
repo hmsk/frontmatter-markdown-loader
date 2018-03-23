@@ -1,5 +1,7 @@
 # frontmatter-markdown-loader
 
+[![npm](https://img.shields.io/npm/v/frontmatter-markdown-loader.svg?style=for-the-badge)](https://www.npmjs.com/package/frontmatter-markdown-loader)
+
 Webpack Loader for: FrontMatter (.md) -> Markdown + Meta -> HTML + Meta (+ Vue template)
 
 ## Instllation
