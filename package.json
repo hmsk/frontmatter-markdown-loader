@@ -1,0 +1,31 @@
+{
+  "name": "frontmatter-markdown-loader",
+  "version": "1.0.0",
+  "description": "All in one Webpack loader for Front Matter-ed Markdown file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hmsk/frontmatter-markdown-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "markdown",
+    "frontmatter",
+    "vue",
+    "loader"
+  ],
+  "author": "Kengo Hamasaki <k.hamasaki@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hmsk/frontmatter-markdown-loader/issues"
+  },
+  "homepage": "https://github.com/hmsk/frontmatter-markdown-loader#readme",
+  "dependencies": {
+    "front-matter": "^2.3.0",
+    "loader-utils": "^1.1.0",
+    "markdown-it": "^8.4.1"
+  }
+}
