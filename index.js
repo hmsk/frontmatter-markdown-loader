@@ -1,5 +1,7 @@
 const loaderUtils = require('loader-utils')
 const frontmatter = require('front-matter')
+const vueTemplateCompiler = require('vue-template-compiler')
+const vueTemplateStripWith = require('vue-template-es2015-compiler')
 
 const md = require('markdown-it')({
   html: true,
@@ -16,6 +18,17 @@ module.exports = function (source) {
     fm.html = options.markdown(fm.body);
   } else {
     fm.html = md.render(fm.body);
+  }
+
+  if (options.vue) {
+    const compiled = vueTemplateCompiler.compile(`<div>${fm.html}</div>`)
+    fm.vue['render'] = vueTemplateStripWith(`function render() { ${compiled.render} }`)
+
+    let staticRenderFns = '';
+    if (compiled.staticRenderFns.length > 0) {
+      staticRenderFns = vueTemplateStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)
+    }
+    fm.vue['staticRenderFns'] = staticRenderFns
   }
 
   const stringified = JSON.stringify(fm)
