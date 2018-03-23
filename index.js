@@ -1,11 +1,16 @@
 const loaderUtils = require('loader-utils')
 const frontmatter = require('front-matter')
-const vueTemplateCompiler = require('vue-template-compiler')
-const vueTemplateStripWith = require('vue-template-es2015-compiler')
 
 const md = require('markdown-it')({
   html: true,
 });
+
+let vueCompiler, vueCompilerStripWith
+try {
+  vueCompiler = require('vue-template-compiler')
+  vueCompilerStripWith = require('vue-template-es2015-compiler')
+} catch (err) {
+}
 
 module.exports = function (source) {
   if (this.cacheable) this.cacheable();
@@ -20,15 +25,19 @@ module.exports = function (source) {
     fm.html = md.render(fm.body);
   }
 
-  if (options.vue) {
-    const compiled = vueTemplateCompiler.compile(`<div>${fm.html}</div>`)
-    fm.vue['render'] = vueTemplateStripWith(`function render() { ${compiled.render} }`)
+  if (options.vue && vueCompiler && vueCompilerStripWith) {
+    const compiled = vueCompiler.compile(`<div>${fm.html}</div>`)
+    const render = `return ${vueCompilerStripWith(`function render() { ${compiled.render} }`)}`
 
     let staticRenderFns = '';
     if (compiled.staticRenderFns.length > 0) {
-      staticRenderFns = vueTemplateStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)
+      staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
     }
-    fm.vue['staticRenderFns'] = staticRenderFns
+
+    fm.vue = {
+      render,
+      staticRenderFns
+    }
   }
 
   const stringified = JSON.stringify(fm)
@@ -37,3 +46,5 @@ module.exports = function (source) {
 
   return `module.exports = ${stringified}`;
 }
+
+

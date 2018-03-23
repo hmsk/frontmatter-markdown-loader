@@ -26,8 +26,10 @@
   "dependencies": {
     "front-matter": "^2.3.0",
     "loader-utils": "^1.1.0",
-    "markdown-it": "^8.4.1",
-    "vue-template-compiler": "^2.5.16",
+    "markdown-it": "^8.4.1"
+  },
+  "optionalDependencies": {
+    "vue-template-compiler": "^2.5.0",
     "vue-template-es2015-compiler": "^1.6.0"
   }
 }
