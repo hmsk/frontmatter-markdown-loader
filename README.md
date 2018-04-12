@@ -104,7 +104,7 @@ export default {
   data: {
     templateRender: null
   },
-  
+
   components: {
     OtherComponent // If markdown has `<other-component>` in body, will work :)
   }
@@ -120,7 +120,23 @@ export default {
 }
 ```
 
-This component renders
+This component renders the compiled markdown including workable `OtherComponent` 🎉
+
+
+Also you can give the class name of body html with `options.vue.root`.
+
+```js
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader'
+  options: {
+    vue: {
+      root: 'dynamicContent'
+    }
+  }
+}
+```
+
 
 ## Inspired/Refered
 
