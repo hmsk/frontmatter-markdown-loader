@@ -1,6 +1,6 @@
 {
   "name": "frontmatter-markdown-loader",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "All in one Webpack loader for Front Matter-ed Markdown file",
   "main": "index.js",
   "scripts": {
