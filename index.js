@@ -25,8 +25,9 @@ module.exports = function (source) {
     fm.html = md.render(fm.body);
   }
 
-  if (options.vue && vueCompiler && vueCompilerStripWith) {
-    const compiled = vueCompiler.compile(`<div>${fm.html}</div>`)
+  if (!!options.vue && vueCompiler && vueCompilerStripWith) {
+    const rootClass = options.vue.root || "frontmatter-markdown"
+    const compiled = vueCompiler.compile(`<div class="${rootClass}">${fm.html}</div>`)
     const render = `return ${vueCompilerStripWith(`function render() { ${compiled.render} }`)}`
 
     let staticRenderFns = '';
