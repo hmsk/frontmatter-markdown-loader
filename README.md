@@ -107,7 +107,25 @@ The loader could compile HTML section of files as Vue template.
 }
 ```
 
-This returns functions by compiled template as string `render`, `staticRenderFns` which are Vue component requires.
+By this option, the loader provides `vue.component` which is extendable as Vue's component
+
+```js
+import fm from "something.md"
+
+export default {
+  extends: fm.vue.component,
+  components: {
+    OtherComponent // If markdown has `<other-component>` in body, will work :)
+  }
+}
+```
+
+This component renders the compiled markdown including workable `OtherComponent` 🎉
+
+### Render functions for Vue
+
+Or can get functions by compiled template as string `render`, `staticRenderFns` which are Vue component requires.
+
 
 ```js
 import fm from "something.md"
@@ -143,8 +161,7 @@ export default {
 }
 ```
 
-This component renders the compiled markdown including workable `OtherComponent` 🎉
-
+### Component's root element
 
 Also you can give the class name of body html with `options.vue.root`.
 
