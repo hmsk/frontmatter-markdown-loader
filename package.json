@@ -4,7 +4,7 @@
   "description": "All in one Webpack loader for Front Matter-ed Markdown file",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,5 +31,13 @@
   "optionalDependencies": {
     "vue-template-compiler": "^2.5.0",
     "vue-template-es2015-compiler": "^1.6.0"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.24",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.4.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
