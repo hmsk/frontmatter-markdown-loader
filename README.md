@@ -4,7 +4,31 @@
 
 Webpack Loader for: FrontMatter (.md) -> Markdown + Meta -> HTML + Meta (+ Vue template)
 
-## Instllation
+This FrontMatter markdown file `something.md`:
+
+```md
+---
+subject: Hello
+tags:
+  - tag1
+  - tag2
+---
+# Title
+
+message
+```
+
+is loaded as:
+
+```js
+import fm from "something.md"
+
+fm.attributes // FrontMatter attributes => { subject: "Hello", tags: ["tag1", "tag2"] }
+fm.body // Markdown source => "# Title\n\nmessage\n"
+fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
+```
+
+# Instllation
 
 ```
 $ npm i -D frontmatter-markdown-loader
@@ -16,7 +40,7 @@ Or
 $ yarn add -D frontmatter-markdown-loader
 ```
 
-## Configuration
+# Setup
 
 Configure the loader for Markdown files like:
 
@@ -27,19 +51,15 @@ Configure the loader for Markdown files like:
 }
 ```
 
-Then you can get frontmatter attributes and compiled markdown.
+Then you can get frontmatter attributes and compiled markdown 🎉
 
 ```js
 import fm from "something.md"
-
-fm.attributes //=> FrontMatter attributes
-fm.body //=> Markdown source
-fm.html //=> Compiled Html
 ```
 
-## Options
+# Options
 
-### Use your own markdown compiler
+## Use your own markdown compiler
 
 ```js
 {
@@ -71,8 +91,7 @@ const md = require('markdown-it')
 }
 ```
 
-
-### Vue template
+## Vue template
 
 The loader could compile HTML section of files as Vue template.
 
@@ -137,12 +156,11 @@ Also you can give the class name of body html with `options.vue.root`.
 }
 ```
 
-
-## Inspired/Refered
+# Inspired/Refered
 
 - [egoist/vmark: Convert markdown to Vue component.](https://github.com/egoist/vmark)
 - [webpack-contrib/json-loader: json loader module for webpack](https://github.com/webpack-contrib/json-loader)
 
-## License
+# License
 
 - [MIT](LICENSE) Copyright Kengo Hamasaki
