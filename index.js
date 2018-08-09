@@ -17,7 +17,7 @@ module.exports = function (source) {
 
   const options = loaderUtils.getOptions(this) || {}
 
-  fm = frontmatter(source)
+  const fm = frontmatter(source)
 
   if (options.markdown) {
     fm.html = options.markdown(fm.body);
