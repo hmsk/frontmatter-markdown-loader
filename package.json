@@ -35,9 +35,13 @@
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.24",
     "babel-preset-env": "^1.7.0",
-    "jest": "^23.4.2"
+    "jest": "^23.4.2",
+    "vue": "^2.5.17",
+    "vue-template-compiler": "^2.5.17",
+    "vue-template-es2015-compiler": "^1.6.0"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "jsdom",
+    "testURL": "http://localhost"
   }
 }
