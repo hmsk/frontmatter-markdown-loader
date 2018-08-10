@@ -1,4 +1,7 @@
 import Loader from "../index";
+import { mount } from '@vue/test-utils'
+
+let loaded;
 
 const defaultContext = {
   cachable: false
@@ -6,7 +9,7 @@ const defaultContext = {
 
 const load = (source, context = defaultContext) => {
   const rawLoaded = Loader.call(context, source);
-  return JSON.parse(rawLoaded.replace(/^module.exports =/, ""));
+  loaded = JSON.parse(rawLoaded.replace(/^module.exports =/, ""));
 }
 
 const markdownWithFrontmatter = `---
@@ -21,11 +24,13 @@ GOOD BYE
 `;
 
 describe("frontmatter-markdown-loader", () => {
-  let loaded;
+  afterEach(() => {
+    loaded = undefined;
+  });
 
   describe("against Frontmatter markdown without any option", () => {
     beforeEach(() => {
-      loaded = load(markdownWithFrontmatter);
+      load(markdownWithFrontmatter);
     });
 
     it("returns compiled HTML for 'html' property", () => {
@@ -36,28 +41,57 @@ describe("frontmatter-markdown-loader", () => {
       expect(loaded.body).toBe("# Title\n\nGOOD BYE\n");
     });
 
-  it("returns frontmatter object for 'attributes' property", () => {
-      expect(loaded.attributes).toEqual({
-        subject: "Hello",
-        tags: ["tag1", "tag2"]
+    it("returns frontmatter object for 'attributes' property", () => {
+        expect(loaded.attributes).toEqual({
+          subject: "Hello",
+          tags: ["tag1", "tag2"]
+        });
       });
+
+    it("doesn't returns 'vue' property", () => {
+      expect(loaded.vue).toBeUndefined();
     });
   });
-
-  it("doesn't returns 'vue' property", () => {
-    expect(loaded.vue).toBeUndefined();
-  });
-
 
   describe("with Vue option", () => {
-    beforeEach(() => {
-      loaded = load(markdownWithFrontmatter, { ...defaultContext, query: { vue: true } });
-    });
+    const buildVueComponent = () => {
+      return {
+        data () {
+          return {
+            templateRender: null
+          }
+        },
+
+        render: function (createElement) {
+          return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
+        },
+
+        created: function () {
+          this.templateRender = new Function(loaded.vue.render)();
+          this.$options.staticRenderFns = new Function(loaded.vue.staticRenderFns)();
+        }
+      }
+    };
 
     it("returns 'vue' property which has render and staticRenderFns", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: true } });
       expect(loaded.vue).toBeDefined();
       expect(loaded.vue.render).toBeDefined();
       expect(loaded.vue.staticRenderFns).toBeDefined();
+    });
+
+    it("returns functions to run as Vue component giving 'frontmatter-markdown' to class of root element", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: true } });
+      const component = buildVueComponent();
+      const wrapper = mount(component);
+      expect(wrapper.attributes().class).toBe("frontmatter-markdown");
+    });
+
+    it("returns functions to run as Vue component giving requested name to class of root element", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: { root: "forJest" } } });
+      const component = buildVueComponent();
+      const wrapper = mount(component);
+      expect(wrapper.attributes().class).toBe("forJest");
     });
   });
 });
