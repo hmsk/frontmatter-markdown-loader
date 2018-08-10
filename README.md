@@ -126,7 +126,7 @@ export default {
 
   components: {
     OtherComponent // If markdown has `<other-component>` in body, will work :)
-  }
+  },
 
   render: function (createElement) {
     return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
@@ -135,7 +135,7 @@ export default {
   created: function () {
     this.templateRender = new Function(fm.vue.render)();
     this.$options.staticRenderFns = new Function(fm.vue.staticRenderFns)();
-  },
+  }
 }
 ```
 
