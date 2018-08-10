@@ -120,8 +120,10 @@ so, you can use them in your Vue component:
 import OtherComponent from "OtherComponent.vue"
 
 export default {
-  data: {
-    templateRender: null
+  data () {
+    return {
+      templateRender: null
+    }
   },
 
   components: {
