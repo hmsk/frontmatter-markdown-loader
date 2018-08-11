@@ -1,5 +1,6 @@
 import Loader from "../index";
-import { mount } from '@vue/test-utils'
+import { mount, createLocalVue } from "@vue/test-utils";
+import ChildComponent from "./child-component";
 
 let loaded;
 
@@ -22,6 +23,19 @@ tags:
 
 GOOD BYE
 `;
+
+const markdownWithFrontmatterIncludingChildComponent = `---
+subject: Hello
+tags:
+  - tag1
+  - tag2
+---
+# Title
+
+HELLO
+<child-component>
+`;
+
 
 describe("frontmatter-markdown-loader", () => {
   afterEach(() => {
@@ -55,12 +69,15 @@ describe("frontmatter-markdown-loader", () => {
 
   describe("with Vue option", () => {
     const buildVueComponent = () => {
+      const localVue = createLocalVue();
       return {
         data () {
           return {
             templateRender: null
           }
         },
+
+        components: { ChildComponent },
 
         render: function (createElement) {
           return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
@@ -92,6 +109,14 @@ describe("frontmatter-markdown-loader", () => {
       const component = buildVueComponent();
       const wrapper = mount(component);
       expect(wrapper.attributes().class).toBe("forJest");
+    });
+
+    it("returns functions to run as Vue component which includes child component", () => {
+      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
+      const component = buildVueComponent();
+      const wrapper = mount(component);
+      expect(wrapper.find(ChildComponent).exists()).toBe(true);
+      expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
     });
   });
 });

@@ -37,11 +37,20 @@
     "babel-preset-env": "^1.7.0",
     "jest": "^23.4.2",
     "vue": "^2.5.17",
+    "vue-jest": "^2.6.0",
     "vue-template-compiler": "^2.5.17",
     "vue-template-es2015-compiler": "^1.6.0"
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "testURL": "http://localhost"
+    "testURL": "http://localhost",
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.vue$": "vue-jest"
+    }
   }
 }
