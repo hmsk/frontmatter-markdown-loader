@@ -46,20 +46,18 @@ module.exports = function (source) {
       vue: {
         render: ${stringify(render)},
         staticRenderFns: ${stringify(staticRenderFns)},
-        baseComponent () {
-          return {
-            data () {
-              return {
-                templateRender: null
-              }
-            },
-            render (createElement) {
-              return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
-            },
-            created () {
-              this.templateRender = new Function(${stringify(render)})();
-              this.$options.staticRenderFns = new Function(${stringify(staticRenderFns)})();
+        component: {
+          data () {
+            return {
+              templateRender: null
             }
+          },
+          render (createElement) {
+            return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
+          },
+          created () {
+            this.templateRender = new Function(${stringify(render)})();
+            this.$options.staticRenderFns = new Function(${stringify(staticRenderFns)})();
           }
         }
       }

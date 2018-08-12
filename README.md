@@ -113,7 +113,7 @@ By this option, the loader provides `vue.component` which is extendable as Vue's
 import fm from "something.md"
 
 export default {
-  extends: fm.vue.baseComponent(),
+  extends: fm.vue.component,
   components: {
     OtherComponent // If markdown has `<other-component>` in body, will work :)
   }

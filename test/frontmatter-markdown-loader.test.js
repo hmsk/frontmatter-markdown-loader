@@ -123,7 +123,7 @@ describe("frontmatter-markdown-loader", () => {
     it("returns extendable base Vue component", () => {
       load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
       const component = {
-        extends: loaded.vue.baseComponent(),
+        extends: loaded.vue.component,
         components: { ChildComponent }
       };
       const wrapper = mount(component);
