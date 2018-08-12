@@ -46,7 +46,7 @@ module.exports = function (source) {
       vue: {
         render: ${stringify(render)},
         staticRenderFns: ${stringify(staticRenderFns)},
-        buildComponent () {
+        baseComponent () {
           return {
             data () {
               return {

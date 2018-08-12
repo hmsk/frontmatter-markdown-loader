@@ -120,10 +120,10 @@ describe("frontmatter-markdown-loader", () => {
       expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
     });
 
-    it("returns extendable Vue component", () => {
+    it("returns extendable base Vue component", () => {
       load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
       const component = {
-        extends: loaded.vue.buildComponent(),
+        extends: loaded.vue.baseComponent(),
         components: { ChildComponent }
       };
       const wrapper = mount(component);

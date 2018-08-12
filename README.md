@@ -113,7 +113,7 @@ By this option, the loader provides `vue.component` which is extendable as Vue's
 import fm from "something.md"
 
 export default {
-  extends: fm.vue.buildComponent(),
+  extends: fm.vue.baseComponent(),
   components: {
     OtherComponent // If markdown has `<other-component>` in body, will work :)
   }
@@ -125,7 +125,6 @@ This component renders the compiled markdown including workable `OtherComponent`
 ### Render functions for Vue
 
 Or can get functions by compiled template as string `render`, `staticRenderFns` which are Vue component requires.
-
 
 ```js
 import fm from "something.md"
