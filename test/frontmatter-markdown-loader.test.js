@@ -1,6 +1,7 @@
 import Loader from "../index";
 import { mount, createLocalVue } from "@vue/test-utils";
 import ChildComponent from "./child-component";
+import nodeEval from "node-eval";
 
 let loaded;
 
@@ -10,7 +11,7 @@ const defaultContext = {
 
 const load = (source, context = defaultContext) => {
   const rawLoaded = Loader.call(context, source);
-  loaded = JSON.parse(rawLoaded.replace(/^module.exports =/, ""));
+  loaded = nodeEval(rawLoaded);
 }
 
 const markdownWithFrontmatter = `---
@@ -114,6 +115,17 @@ describe("frontmatter-markdown-loader", () => {
     it("returns functions to run as Vue component which includes child component", () => {
       load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
       const component = buildVueComponent();
+      const wrapper = mount(component);
+      expect(wrapper.find(ChildComponent).exists()).toBe(true);
+      expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
+    });
+
+    it("returns extendable Vue component", () => {
+      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
+      const component = {
+        extends: loaded.vue.buildComponent(),
+        components: { ChildComponent }
+      };
       const wrapper = mount(component);
       expect(wrapper.find(ChildComponent).exists()).toBe(true);
       expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");

@@ -5,6 +5,8 @@ const md = require('markdown-it')({
   html: true,
 });
 
+const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+
 let vueCompiler, vueCompilerStripWith
 try {
   vueCompiler = require('vue-template-compiler')
@@ -25,6 +27,11 @@ module.exports = function (source) {
     fm.html = md.render(fm.body);
   }
 
+  let output = `
+    body: ${stringify(fm.body)},
+    html: ${stringify(fm.html)},
+    attributes: ${stringify(fm.attributes)}`;
+
   if (!!options.vue && vueCompiler && vueCompilerStripWith) {
     const rootClass = options.vue.root || "frontmatter-markdown"
     const compiled = vueCompiler.compile(`<div class="${rootClass}">${fm.html}</div>`)
@@ -35,17 +42,29 @@ module.exports = function (source) {
       staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
     }
 
-    fm.vue = {
-      render,
-      staticRenderFns
-    }
+    output += `,
+      vue: {
+        render: ${stringify(render)},
+        staticRenderFns: ${stringify(staticRenderFns)},
+        buildComponent () {
+          return {
+            data () {
+              return {
+                templateRender: null
+              }
+            },
+            render (createElement) {
+              return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
+            },
+            created () {
+              this.templateRender = new Function(${stringify(render)})();
+              this.$options.staticRenderFns = new Function(${stringify(staticRenderFns)})();
+            }
+          }
+        }
+      }
+    `;
   }
 
-  const stringified = JSON.stringify(fm)
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029');
-
-  return `module.exports = ${stringified}`;
+  return `module.exports = { ${output} }`;
 }
-
-
