@@ -26,16 +26,16 @@
   "dependencies": {
     "front-matter": "^2.3.0",
     "loader-utils": "^1.1.0",
-    "markdown-it": "^8.4.1"
+    "markdown-it": "^8.4.2"
   },
   "optionalDependencies": {
     "vue-template-compiler": "^2.5.0",
     "vue-template-es2015-compiler": "^1.6.0"
   },
   "devDependencies": {
-    "@vue/test-utils": "^1.0.0-beta.24",
+    "@vue/test-utils": "^1.0.0-beta.25",
     "babel-preset-env": "^1.7.0",
-    "jest": "^23.4.2",
+    "jest": "^23.6.0",
     "node-eval": "^2.0.0",
     "vue": "^2.5.17",
     "vue-jest": "^2.6.0",
