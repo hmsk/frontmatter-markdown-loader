@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/hmsk/frontmatter-markdown-loader#readme",
   "dependencies": {
-    "front-matter": "^2.3.0",
+    "front-matter": "^3.0.0",
     "loader-utils": "^1.1.0",
     "markdown-it": "^8.4.2"
   },
