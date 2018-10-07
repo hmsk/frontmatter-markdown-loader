@@ -1,7 +1,7 @@
 # frontmatter-markdown-loader
 
 [![npm](https://img.shields.io/npm/v/frontmatter-markdown-loader.svg?style=for-the-badge)](https://www.npmjs.com/package/frontmatter-markdown-loader)
-![CircleCI](https://img.shields.io/circleci/project/github/hmsk/frontmatter-markdown-loader.svg?style=for-the-badge)
+[![CircleCI](https://img.shields.io/circleci/project/github/hmsk/frontmatter-markdown-loader.svg?style=for-the-badge)](https://circleci.com/gh/hmsk/frontmatter-markdown-loader/tree/master)
 
 
 Webpack Loader for: FrontMatter (.md) which returns Compiled HTML + Attributes (+ [Compied object as Vue component](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample))
