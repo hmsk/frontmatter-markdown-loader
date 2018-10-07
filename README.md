@@ -122,9 +122,9 @@ export default {
 
 This component renders the compiled markdown including workable `OtherComponent` 🎉
 
-### Render functions for Vue
-
-Or can get functions by compiled template as string `render`, `staticRenderFns` which are Vue component requires.
+<details><summary>
+Or can take functions by compiled template as string `render`, `staticRenderFns` which are Vue component requires.
+</summary>
 
 ```js
 import fm from "something.md"
@@ -159,6 +159,7 @@ export default {
   }
 }
 ```
+</details>
 
 ### Component's root element
 
