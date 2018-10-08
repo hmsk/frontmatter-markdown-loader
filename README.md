@@ -4,7 +4,7 @@
 [![CircleCI](https://img.shields.io/circleci/project/github/hmsk/frontmatter-markdown-loader.svg?style=for-the-badge)](https://circleci.com/gh/hmsk/frontmatter-markdown-loader/tree/master)
 
 
-Webpack Loader for: FrontMatter (.md) which returns Compiled HTML + Attributes (+ [Compied object as Vue component](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample))
+Webpack Loader for: FrontMatter (.md) which returns Compiled HTML + Attributes (+ [Compiled object as a Vue component](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample))
 
 This FrontMatter markdown file `something.md`:
 
