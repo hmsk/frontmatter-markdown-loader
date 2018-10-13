@@ -47,7 +47,7 @@ module.exports = function (source) {
         render: ${stringify(render)},
         staticRenderFns: ${stringify(staticRenderFns)},
         component: {
-          data () {
+          data: function () {
             return {
               templateRender: null
             }
