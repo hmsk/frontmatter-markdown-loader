@@ -7,10 +7,9 @@ const md = require('markdown-it')({
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
-let vueCompiler, vueCompilerStripWith
+let vueCompiler
 try {
-  vueCompiler = require('vue-template-compiler')
-  vueCompilerStripWith = require('vue-template-es2015-compiler')
+  vueCompiler = require('vue-template-es2015-compiler')
 } catch (err) {
 }
 
@@ -32,14 +31,14 @@ module.exports = function (source) {
     html: ${stringify(fm.html)},
     attributes: ${stringify(fm.attributes)}`;
 
-  if (!!options.vue && vueCompiler && vueCompilerStripWith) {
+  if (!!options.vue && vueCompiler) {
     const rootClass = options.vue.root || "frontmatter-markdown"
     const compiled = vueCompiler.compile(`<div class="${rootClass}">${fm.html}</div>`)
-    const render = `return ${vueCompilerStripWith(`function render() { ${compiled.render} }`)}`
+    const render = `return ${vueCompiler(`function render() { ${compiled.render} }`)}`
 
     let staticRenderFns = '';
     if (compiled.staticRenderFns.length > 0) {
-      staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
+      staticRenderFns = `return ${vueCompiler(`[${compiled.staticRenderFns.map(function(fn) { return `function () { ${fn} }` }).join(',')}]`)}`
     }
 
     output += `,
@@ -56,8 +55,8 @@ module.exports = function (source) {
             return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
           },
           created () {
-            this.templateRender = ${vueCompilerStripWith(`function render() { ${compiled.render} }`)};
-            this.$options.staticRenderFns = ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)};
+            this.templateRender = ${vueCompiler(`function render() { ${compiled.render} }`)};
+            this.$options.staticRenderFns = ${vueCompiler(`[${compiled.staticRenderFns.map(function(fn) { return `function () { ${fn} }` }).join(',')}]`)};
           }
         }
       }
