@@ -39,7 +39,7 @@ module.exports = function (source) {
 
     let staticRenderFns = '';
     if (compiled.staticRenderFns.length > 0) {
-      staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
+      staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(function(fn) { return `function () { ${fn} }` }).join(',')}]`)}`
     }
 
     output += `,
@@ -57,7 +57,7 @@ module.exports = function (source) {
           },
           created () {
             this.templateRender = ${vueCompilerStripWith(`function render() { ${compiled.render} }`)};
-            this.$options.staticRenderFns = ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)};
+            this.$options.staticRenderFns = ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(function(fn) { return `function () { ${fn} }` }).join(',')}]`)};
           }
         }
       }
