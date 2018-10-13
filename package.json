@@ -26,10 +26,10 @@
   "dependencies": {
     "front-matter": "^3.0.0",
     "loader-utils": "^1.1.0",
-    "markdown-it": "^8.4.2"
+    "markdown-it": "^8.4.2",
+    "vue-template-es2015-compiler": "^1.6.0"
   },
   "optionalDependencies": {
-    "vue-template-compiler": "^2.5.0",
     "vue-template-es2015-compiler": "^1.6.0"
   },
   "devDependencies": {
@@ -39,7 +39,6 @@
     "node-eval": "^2.0.0",
     "vue": "^2.5.17",
     "vue-jest": "^2.6.0",
-    "vue-template-compiler": "^2.5.17",
     "vue-template-es2015-compiler": "^1.6.0"
   },
   "jest": {
