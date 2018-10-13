@@ -7,9 +7,8 @@ const md = require('markdown-it')({
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
-let vueCompiler, vueCompilerStripWith
+let vueCompilerStripWith
 try {
-  vueCompiler = require('vue-template-compiler')
   vueCompilerStripWith = require('vue-template-es2015-compiler')
 } catch (err) {
 }
@@ -32,9 +31,9 @@ module.exports = function (source) {
     html: ${stringify(fm.html)},
     attributes: ${stringify(fm.attributes)}`;
 
-  if (!!options.vue && vueCompiler && vueCompilerStripWith) {
+  if (!!options.vue && vueCompilerStripWith) {
     const rootClass = options.vue.root || "frontmatter-markdown"
-    const compiled = vueCompiler.compile(`<div class="${rootClass}">${fm.html}</div>`)
+    const compiled = vueCompilerStripWith.compile(`<div class="${rootClass}">${fm.html}</div>`)
     const render = `return ${vueCompilerStripWith(`function render() { ${compiled.render} }`)}`
 
     let staticRenderFns = '';
