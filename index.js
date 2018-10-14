@@ -47,15 +47,15 @@ module.exports = function (source) {
         render: ${stringify(render)},
         staticRenderFns: ${stringify(staticRenderFns)},
         component: {
-          data () {
+          data: function () {
             return {
               templateRender: null
             }
           },
-          render (createElement) {
+          render: function (createElement) {
             return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
           },
-          created () {
+          created: function () {
             this.templateRender = ${vueCompilerStripWith(`function render() { ${compiled.render} }`)};
             this.$options.staticRenderFns = ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)};
           }
