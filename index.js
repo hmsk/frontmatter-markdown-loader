@@ -34,7 +34,7 @@ module.exports = function (source) {
 
   if (!!options.vue && vueCompiler && vueCompilerStripWith) {
     const rootClass = options.vue.root || "frontmatter-markdown"
-    const template = fm.html.replace("<code", "<code v-pre");
+    const template = fm.html.replace(/<code/g, "<code v-pre");
     const compiled = vueCompiler.compile(`<div class="${rootClass}">${template}</div>`)
     const render = `return ${vueCompilerStripWith(`function render() { ${compiled.render} }`)}`
 
