@@ -72,8 +72,12 @@ describe("frontmatter-markdown-loader", () => {
   });
 
   describe("with Vue option", () => {
-    const buildVueComponent = () => {
+    const mountComponent = (component) => {
       const localVue = createLocalVue();
+      return mount(component, { localVue });
+    };
+
+    const buildVueComponent = () => {
       return {
         data () {
           return {
@@ -103,22 +107,19 @@ describe("frontmatter-markdown-loader", () => {
 
     it("returns functions to run as Vue component giving 'frontmatter-markdown' to class of root element", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { vue: true } });
-      const component = buildVueComponent();
-      const wrapper = mount(component);
+      const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.attributes().class).toBe("frontmatter-markdown");
     });
 
     it("returns functions to run as Vue component giving requested name to class of root element", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { vue: { root: "forJest" } } });
-      const component = buildVueComponent();
-      const wrapper = mount(component);
+      const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.attributes().class).toBe("forJest");
     });
 
     it("returns functions to run as Vue component which includes child component", () => {
       load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
-      const component = buildVueComponent();
-      const wrapper = mount(component);
+      const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.find(ChildComponent).exists()).toBe(true);
       expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
     });
@@ -129,7 +130,7 @@ describe("frontmatter-markdown-loader", () => {
         extends: loaded.vue.component,
         components: { ChildComponent }
       };
-      const wrapper = mount(component);
+      const wrapper = mountComponent(component);
       expect(wrapper.find(ChildComponent).exists()).toBe(true);
       expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
     });
@@ -140,7 +141,7 @@ describe("frontmatter-markdown-loader", () => {
         extends: loaded.vue.component,
         components: { ChildComponent }
       };
-      const wrapper = mount(component);
+      const wrapper = mountComponent(component);
       expect(wrapper.find("code").text()).toContain("<child-component>{{ test->() }}</child-component>");
     });
   });
