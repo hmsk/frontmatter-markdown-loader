@@ -35,8 +35,11 @@ tags:
 
 HELLO
 <child-component>
-`;
 
+\`\`\`html
+<child-component>{{ test->() }}</child-component>
+\`\`\`
+`;
 
 describe("frontmatter-markdown-loader", () => {
   afterEach(() => {
@@ -129,6 +132,16 @@ describe("frontmatter-markdown-loader", () => {
       const wrapper = mount(component);
       expect(wrapper.find(ChildComponent).exists()).toBe(true);
       expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
+    });
+
+    it("avoids compiling code snipets on markdown", () => {
+      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
+      const component = {
+        extends: loaded.vue.component,
+        components: { ChildComponent }
+      };
+      const wrapper = mount(component);
+      expect(wrapper.find("code").text()).toContain("<child-component>{{ test->() }}</child-component>");
     });
   });
 });
