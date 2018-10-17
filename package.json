@@ -1,6 +1,6 @@
 {
   "name": "frontmatter-markdown-loader",
-  "version": "1.4.0-beta.3",
+  "version": "1.4.0",
   "description": "Webpack loader for Front Matter-ed Markdown file to get frontmatter attributes and compiled Vue component",
   "main": "index.js",
   "scripts": {
