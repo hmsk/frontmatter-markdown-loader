@@ -1,6 +1,7 @@
 import Loader from "../index";
 import { mount, createLocalVue } from "@vue/test-utils";
 import ChildComponent from "./child-component";
+import CodeConfusing from "./code-confusing";
 import nodeEval from "node-eval";
 
 let loaded;
@@ -35,6 +36,8 @@ tags:
 
 HELLO
 <child-component>
+
+<code-confusing />
 
 \`\`\`html
 <child-component>{{ test->() }}</child-component>
@@ -89,7 +92,7 @@ describe("frontmatter-markdown-loader", () => {
           }
         },
 
-        components: { ChildComponent },
+        components: { ChildComponent, CodeConfusing },
 
         render: function (createElement) {
           return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
@@ -132,7 +135,7 @@ describe("frontmatter-markdown-loader", () => {
       load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
       const component = {
         extends: loaded.vue.component,
-        components: { ChildComponent }
+        components: { ChildComponent, CodeConfusing }
       };
       const wrapper = mountComponent(component);
       expect(wrapper.find(ChildComponent).exists()).toBe(true);
@@ -143,13 +146,14 @@ describe("frontmatter-markdown-loader", () => {
       load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
       const component = {
         extends: loaded.vue.component,
-        components: { ChildComponent }
+        components: { ChildComponent, CodeConfusing }
       };
       const wrapper = mountComponent(component);
       const snipets = wrapper.findAll("code");
       expect(snipets).toHaveLength(2);
       expect(snipets.at(0).text()).toContain("<child-component>{{ test->() }}</child-component>");
       expect(snipets.at(1).text()).toContain("<sample-component>{{ app->() }}</sample-component>");
+      expect(wrapper.contains(CodeConfusing)).toBe(true);
     });
   });
 });
