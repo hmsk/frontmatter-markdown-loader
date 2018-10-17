@@ -39,6 +39,10 @@ HELLO
 \`\`\`html
 <child-component>{{ test->() }}</child-component>
 \`\`\`
+
+\`\`\`
+<sample-component>{{ app->() }}</sample-component>
+\`\`\`
 `;
 
 describe("frontmatter-markdown-loader", () => {
@@ -142,7 +146,10 @@ describe("frontmatter-markdown-loader", () => {
         components: { ChildComponent }
       };
       const wrapper = mountComponent(component);
-      expect(wrapper.find("code").text()).toContain("<child-component>{{ test->() }}</child-component>");
+      const snipets = wrapper.findAll("code");
+      expect(snipets).toHaveLength(2);
+      expect(snipets.at(0).text()).toContain("<child-component>{{ test->() }}</child-component>");
+      expect(snipets.at(1).text()).toContain("<sample-component>{{ app->() }}</sample-component>");
     });
   });
 });
