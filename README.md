@@ -95,7 +95,7 @@ const md = require('markdown-it')
 
 ## Vue template
 
-The loader could compile HTML section of files as Vue template.
+The loader could compile HTML section of files as Vue template. (Excepting code snipets as Markdown which will be compiled to `<code>`)
 
 Then you need to install `vue-template-compiler` and `vue-template-es2015-compiler` to your project (These are in optional dependencies).
 
