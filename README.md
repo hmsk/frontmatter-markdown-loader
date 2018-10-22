@@ -185,6 +185,10 @@ Also you can give the class name of body html with `options.vue.root`.
 - [egoist/vmark: Convert markdown to Vue component.](https://github.com/egoist/vmark)
 - [webpack-contrib/json-loader: json loader module for webpack](https://github.com/webpack-contrib/json-loader)
 
+# Contributor
+
+- [Daniel Roe / @danielroe](https://github.com/danielroe)
+
 # License
 
 - [MIT](LICENSE) Copyright Kengo Hamasaki
