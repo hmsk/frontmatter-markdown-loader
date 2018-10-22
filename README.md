@@ -30,7 +30,7 @@ fm.body // Markdown source => "# Title\n\nmessage\n"
 fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
 ```
 
-# Instllation
+## Instllation
 
 ```
 $ npm i -D frontmatter-markdown-loader
@@ -42,7 +42,7 @@ Or
 $ yarn add -D frontmatter-markdown-loader
 ```
 
-# Setup
+## Setup
 
 Configure the loader for Markdown files like:
 
@@ -59,9 +59,9 @@ Then you can get frontmatter attributes and compiled markdown 🎉
 import fm from "something.md"
 ```
 
-# Options
+## Options
 
-## Use your own markdown compiler
+### Use your own markdown compiler
 
 ```js
 {
@@ -93,7 +93,7 @@ const md = require('markdown-it')
 }
 ```
 
-## Vue template
+### Vue template
 
 The loader could compile HTML section of files as Vue template. (Excepting code snipets as Markdown which will be compiled to `<code>`)
 
@@ -164,7 +164,7 @@ export default {
 ```
 </details>
 
-### Component's root element
+#### Component's root element
 
 Also you can give the class name of body html with `options.vue.root`.
 
@@ -180,15 +180,15 @@ Also you can give the class name of body html with `options.vue.root`.
 }
 ```
 
-# Inspired/Referred
+## Inspired/Referred
 
 - [egoist/vmark: Convert markdown to Vue component.](https://github.com/egoist/vmark)
 - [webpack-contrib/json-loader: json loader module for webpack](https://github.com/webpack-contrib/json-loader)
 
-# Contributor
+## Contributor
 
 - [Daniel Roe / @danielroe](https://github.com/danielroe)
 
-# License
+## License
 
 - [MIT](LICENSE) Copyright Kengo Hamasaki
