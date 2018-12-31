@@ -30,7 +30,7 @@
     "markdown-it": "^8.4.2"
   },
   "optionalDependencies": {
-    "vue-template-compiler": "^2.5.21",
+    "vue-template-compiler": "^2.5.0",
     "vue-template-es2015-compiler": "^1.6.0"
   },
   "devDependencies": {
