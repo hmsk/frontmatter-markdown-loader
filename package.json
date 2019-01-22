@@ -38,9 +38,9 @@
     "babel-preset-env": "1.7.0",
     "jest": "23.6.0",
     "node-eval": "2.0.0",
-    "vue": "2.5.21",
+    "vue": "2.5.22",
     "vue-jest": "3.0.2",
-    "vue-template-compiler": "2.5.21",
+    "vue-template-compiler": "2.5.22",
     "vue-template-es2015-compiler": "1.8.1"
   },
   "jest": {
