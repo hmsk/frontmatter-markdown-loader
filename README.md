@@ -125,6 +125,8 @@ export default {
 
 This component renders the compiled markdown including workable `OtherComponent` 🎉
 
+Here's [the sample project with vue-cli](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample)
+
 <details><summary>
 Or can take functions by compiled template as string `render`, `staticRenderFns` which are Vue component requires.
 </summary>
