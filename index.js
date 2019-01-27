@@ -36,8 +36,8 @@ module.exports = function (source) {
     const rootClass = options.vue.root || "frontmatter-markdown"
     const template = fm
       .html
-      .replace(/<code>/g, "<code v-pre>")
-      .replace(/<(code ).+>/g, "<$1 v-pre>");
+      .replace(/<(code\s.+)>/g, "<$1 v-pre>")
+      .replace(/<code>/g, "<code v-pre>");
     const compiled = vueCompiler.compile(`<div class="${rootClass}">${template}</div>`)
     const render = `return ${vueCompilerStripWith(`function render() { ${compiled.render} }`)}`
 

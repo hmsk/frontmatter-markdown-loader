@@ -23,7 +23,7 @@ tags:
 ---
 # Title
 
-GOOD BYE
+GOOD \`BYE\` FRIEND
 `;
 
 const markdownWithFrontmatterIncludingChildComponent = `---
@@ -59,11 +59,11 @@ describe("frontmatter-markdown-loader", () => {
     });
 
     it("returns compiled HTML for 'html' property", () => {
-      expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD BYE</p>\n");
+      expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND</p>\n");
     });
 
     it("returns raw markdown body for 'body' property", () => {
-      expect(loaded.body).toBe("# Title\n\nGOOD BYE\n");
+      expect(loaded.body).toBe("# Title\n\nGOOD `BYE` FRIEND\n");
     });
 
     it("returns frontmatter object for 'attributes' property", () => {
@@ -122,6 +122,12 @@ describe("frontmatter-markdown-loader", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { vue: { root: "forJest" } } });
       const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.attributes().class).toBe("forJest");
+    });
+
+    it("returns functions to run as Vue component which has the correct template", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: { root: "forJest" } } });
+      const wrapper = mountComponent(buildVueComponent());
+      expect(wrapper.html()).toBe('<div class=\"forJest\"><h1>Title</h1> <p>GOOD <code>BYE</code> FRIEND</p></div>');
     });
 
     it("returns functions to run as Vue component which includes child component", () => {
