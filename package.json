@@ -39,7 +39,7 @@
     "jest": "23.6.0",
     "node-eval": "2.0.0",
     "vue": "2.6.3",
-    "vue-jest": "3.0.2",
+    "vue-jest": "3.0.3",
     "vue-template-compiler": "2.6.3",
     "vue-template-es2015-compiler": "1.8.2"
   },
