@@ -41,7 +41,7 @@
     "vue": "2.6.6",
     "vue-jest": "3.0.3",
     "vue-template-compiler": "2.6.6",
-    "vue-template-es2015-compiler": "1.8.2"
+    "vue-template-es2015-compiler": "1.9.0"
   },
   "jest": {
     "testEnvironment": "jsdom",
