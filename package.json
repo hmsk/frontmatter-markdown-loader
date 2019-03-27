@@ -40,7 +40,7 @@
     "jest": "24.5.0",
     "node-eval": "2.0.0",
     "vue": "2.6.10",
-    "vue-jest": "3.0.4",
+    "vue-jest": "4.0.0-beta.2",
     "vue-template-compiler": "2.6.10",
     "vue-template-es2015-compiler": "1.9.1"
   },
