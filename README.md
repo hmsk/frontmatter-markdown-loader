@@ -30,7 +30,7 @@ fm.body // Markdown source => "# Title\n\nmessage\n"
 fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
 ```
 
-## Instllation
+## Installation
 
 ```
 $ npm i -D frontmatter-markdown-loader
