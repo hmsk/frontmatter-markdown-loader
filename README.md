@@ -1,4 +1,4 @@
-# frontmatter-markdown-loader
+# frontmatter-markdown-loader [![frontmatter-markdown-loader Dev Token](https://badge.devtoken.rocks/frontmatter-markdown-loader)](https://devtoken.rocks/package/frontmatter-markdown-loader)
 
 [![npm](https://img.shields.io/npm/v/frontmatter-markdown-loader.svg?style=for-the-badge)](https://www.npmjs.com/package/frontmatter-markdown-loader)
 [![CircleCI](https://img.shields.io/circleci/project/github/hmsk/frontmatter-markdown-loader/master.svg?style=for-the-badge)](https://circleci.com/gh/hmsk/frontmatter-markdown-loader/tree/master)
