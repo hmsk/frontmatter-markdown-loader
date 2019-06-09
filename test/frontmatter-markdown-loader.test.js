@@ -7,7 +7,8 @@ import nodeEval from "node-eval";
 let loaded;
 
 const defaultContext = {
-  cachable: false
+  cachable: false,
+  resourcePath: "/somewhere/frontmatter.md"
 };
 
 const load = (source, context = defaultContext) => {
@@ -67,11 +68,14 @@ describe("frontmatter-markdown-loader", () => {
     });
 
     it("returns frontmatter object for 'attributes' property", () => {
-        expect(loaded.attributes).toEqual({
-          subject: "Hello",
-          tags: ["tag1", "tag2"]
-        });
+      expect(loaded.attributes).toEqual({
+        subject: "Hello",
+        tags: ["tag1", "tag2"],
+        _meta: {
+          resourcePath: "/somewhere/frontmatter.md"
+        }
       });
+    });
 
     it("doesn't returns 'vue' property", () => {
       expect(loaded.vue).toBeUndefined();
