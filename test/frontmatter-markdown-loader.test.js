@@ -63,15 +63,15 @@ describe("frontmatter-markdown-loader", () => {
       expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND</p>\n");
     });
 
-    it("returns raw markdown body for 'body' property", () => {
-      expect(loaded.body).toBe("# Title\n\nGOOD `BYE` FRIEND\n");
-    });
-
     it("returns frontmatter object for 'attributes' property", () => {
       expect(loaded.attributes).toEqual({
         subject: "Hello",
         tags: ["tag1", "tag2"]
       });
+    });
+
+    it("doesn't return 'body' property", () => {
+      expect(loaded.body).toBeUndefined();
     });
 
     it("doesn't return 'meta' property", () => {
@@ -80,6 +80,13 @@ describe("frontmatter-markdown-loader", () => {
 
     it("doesn't return 'vue' property", () => {
       expect(loaded.vue).toBeUndefined();
+    });
+  });
+
+  describe("body mode is enabled", () => {
+    it("returns raw markdown body for 'body' property", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.BODY] } });
+      expect(loaded.body).toBe("# Title\n\nGOOD `BYE` FRIEND\n");
     });
   });
 
