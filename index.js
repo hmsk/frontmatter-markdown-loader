@@ -41,8 +41,8 @@ module.exports = function (source) {
     addProperty('meta', stringify(meta));
   }
 
-  if (!!options.vue && vueCompiler && vueCompilerStripWith) {
-    const rootClass = options.vue.root || 'frontmatter-markdown'
+  if ((enabled('vue-component') || enabled('vue-render-functions')) && vueCompiler && vueCompilerStripWith) {
+    const rootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
     const template = fm
       .html
       .replace(/<(code\s.+)>/g, "<$1 v-pre>")
@@ -55,10 +55,17 @@ module.exports = function (source) {
       staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
     }
 
-    addProperty('vue', `
-      {
+    let vueOutput = '';
+
+    if (enabled('vue-render-functions')) {
+      vueOutput += `
         render: ${stringify(render)},
         staticRenderFns: ${stringify(staticRenderFns)},
+      `;
+    }
+
+    if (enabled('vue-component')) {
+      vueOutput += `
         component: {
           data: function () {
             return {
@@ -73,8 +80,10 @@ module.exports = function (source) {
             this.$options.staticRenderFns = ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)};
           }
         }
-      }
-    `);
+      `;
+    }
+
+    addProperty('vue', `{${vueOutput}}`);
   }
 
   return `module.exports = { ${output} }`;

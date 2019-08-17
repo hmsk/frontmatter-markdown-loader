@@ -113,39 +113,39 @@ describe("frontmatter-markdown-loader", () => {
     };
 
     it("returns 'vue' property which has render and staticRenderFns", () => {
-      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: true } });
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: ["vue-render-functions"] } });
       expect(loaded.vue).toBeDefined();
       expect(loaded.vue.render).toBeDefined();
       expect(loaded.vue.staticRenderFns).toBeDefined();
     });
 
     it("returns functions to run as Vue component giving 'frontmatter-markdown' to class of root element", () => {
-      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: true } });
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: ["vue-render-functions"] } });
       const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.attributes().class).toBe("frontmatter-markdown");
     });
 
     it("returns functions to run as Vue component giving requested name to class of root element", () => {
-      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: { root: "forJest" } } });
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: ["vue-render-functions"], vue: { root: "forJest" } } });
       const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.attributes().class).toBe("forJest");
     });
 
     it("returns functions to run as Vue component which has the correct template", () => {
-      load(markdownWithFrontmatter, { ...defaultContext, query: { vue: { root: "forJest" } } });
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: ["vue-render-functions"], vue: { root: "forJest" } } });
       const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.html()).toBe('<div class=\"forJest\"><h1>Title</h1> <p>GOOD <code>BYE</code> FRIEND</p></div>');
     });
 
     it("returns functions to run as Vue component which includes child component", () => {
-      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
+      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { mode: ["vue-render-functions"] } });
       const wrapper = mountComponent(buildVueComponent());
       expect(wrapper.find(ChildComponent).exists()).toBe(true);
       expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
     });
 
     it("returns extendable base Vue component", () => {
-      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
+      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { mode: ["vue-component"] } });
       const component = {
         extends: loaded.vue.component,
         components: { ChildComponent, CodeConfusing }
@@ -156,7 +156,7 @@ describe("frontmatter-markdown-loader", () => {
     });
 
     it("avoids compiling code snipets on markdown", () => {
-      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { vue: true } });
+      load(markdownWithFrontmatterIncludingChildComponent, { ...defaultContext, query: { mode: ["vue-component"] } });
       const component = {
         extends: loaded.vue.component,
         components: { ChildComponent, CodeConfusing }
