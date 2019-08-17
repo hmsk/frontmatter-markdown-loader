@@ -74,14 +74,21 @@ describe("frontmatter-markdown-loader", () => {
       });
     });
 
+    it("doesn't return 'meta' property", () => {
+      expect(loaded.meta).toBeUndefined();
+    });
+
+    it("doesn't return 'vue' property", () => {
+      expect(loaded.vue).toBeUndefined();
+    });
+  });
+
+  describe("meta mode is enabled", () => {
     it("returns meta data on 'meta' property", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.META] } });
       expect(loaded.meta).toEqual({
         resourcePath: "/somewhere/frontmatter.md"
       });
-    });
-
-    it("doesn't returns 'vue' property", () => {
-      expect(loaded.vue).toBeUndefined();
     });
   });
 

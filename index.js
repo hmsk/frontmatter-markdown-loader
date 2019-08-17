@@ -26,7 +26,7 @@ export default function (source) {
   if (this.cacheable) this.cacheable();
 
   const options = loaderUtils.getOptions(this) || {}
-  const requestedMode = Array.isArray(options.mode) ? options.mode : [Mode.HTML, Mode.BODY, Mode.META];
+  const requestedMode = Array.isArray(options.mode) ? options.mode : [Mode.HTML, Mode.BODY];
   const enabled = (mode) => requestedMode.includes(mode);
 
   let output = '';
