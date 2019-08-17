@@ -18,8 +18,10 @@ module.exports = function (source) {
   if (this.cacheable) this.cacheable();
 
   const options = loaderUtils.getOptions(this) || {}
+  const requestedMode = Array.isArray(options.mode) ? options.mode : ['html', 'body', 'meta'];
+  const enabled = (mode) => requestedMode.includes(mode);
 
-  const fm = frontmatter(source)
+  const fm = frontmatter(source);
 
   if (options.markdown) {
     fm.html = options.markdown(fm.body);
@@ -32,10 +34,26 @@ module.exports = function (source) {
   };
 
   let output = `
-    body: ${stringify(fm.body)},
-    html: ${stringify(fm.html)},
     attributes: ${stringify(fm.attributes)},
-    meta: ${stringify(meta)}`;
+  `;
+
+  if (enabled('body')) {
+    output += `
+      body: ${stringify(fm.body)},
+    `
+  }
+
+  if (enabled('html')) {
+    output += `
+      html: ${stringify(fm.html)},
+    `
+  }
+
+  if (enabled('meta')) {
+    output += `
+      meta: ${stringify(meta)},
+    `;
+  }
 
   if (!!options.vue && vueCompiler && vueCompilerStripWith) {
     const rootClass = options.vue.root || "frontmatter-markdown"
@@ -51,7 +69,7 @@ module.exports = function (source) {
       staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
     }
 
-    output += `,
+    output += `
       vue: {
         render: ${stringify(render)},
         staticRenderFns: ${stringify(staticRenderFns)},
