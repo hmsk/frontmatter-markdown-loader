@@ -27,17 +27,15 @@ module.exports = function (source) {
     fm.html = md.render(fm.body);
   }
 
-  const attributes = {
-    ...fm.attributes,
-    _meta: {
-      resourcePath: this.resourcePath
-    }
+  const meta = {
+    resourcePath: this.resourcePath
   };
 
   let output = `
     body: ${stringify(fm.body)},
     html: ${stringify(fm.html)},
-    attributes: ${stringify(attributes)}`;
+    attributes: ${stringify(fm.attributes)},
+    meta: ${stringify(meta)}`;
 
   if (!!options.vue && vueCompiler && vueCompilerStripWith) {
     const rootClass = options.vue.root || "frontmatter-markdown"

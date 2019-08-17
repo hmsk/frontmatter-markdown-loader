@@ -70,10 +70,13 @@ describe("frontmatter-markdown-loader", () => {
     it("returns frontmatter object for 'attributes' property", () => {
       expect(loaded.attributes).toEqual({
         subject: "Hello",
-        tags: ["tag1", "tag2"],
-        _meta: {
-          resourcePath: "/somewhere/frontmatter.md"
-        }
+        tags: ["tag1", "tag2"]
+      });
+    });
+
+    it("returns meta data on 'meta' property", () => {
+      expect(loaded.meta).toEqual({
+        resourcePath: "/somewhere/frontmatter.md"
       });
     });
 
