@@ -21,42 +21,28 @@ module.exports = function (source) {
   const requestedMode = Array.isArray(options.mode) ? options.mode : ['html', 'body', 'meta'];
   const enabled = (mode) => requestedMode.includes(mode);
 
-  const fm = frontmatter(source);
-
-  if (options.markdown) {
-    fm.html = options.markdown(fm.body);
-  } else {
-    fm.html = md.render(fm.body);
-  }
-
-  const meta = {
-    resourcePath: this.resourcePath
+  let output = '';
+  const addProperty = (key, value) => {
+    output += `
+      ${key}: ${value},
+    `;
   };
 
-  let output = `
-    attributes: ${stringify(fm.attributes)},
-  `;
+  const fm = frontmatter(source);
+  fm.html = options.markdown ? options.markdown(fm.body) : md.render(fm.body);
 
-  if (enabled('body')) {
-    output += `
-      body: ${stringify(fm.body)},
-    `
-  }
-
-  if (enabled('html')) {
-    output += `
-      html: ${stringify(fm.html)},
-    `
-  }
-
+  addProperty('attributes', stringify(fm.attributes));
+  if (enabled('html')) addProperty('html', stringify(fm.html));
+  if (enabled('body')) addProperty('body', stringify(fm.body));
   if (enabled('meta')) {
-    output += `
-      meta: ${stringify(meta)},
-    `;
+    const meta = {
+      resourcePath: this.resourcePath
+    };
+    addProperty('meta', stringify(meta));
   }
 
   if (!!options.vue && vueCompiler && vueCompilerStripWith) {
-    const rootClass = options.vue.root || "frontmatter-markdown"
+    const rootClass = options.vue.root || 'frontmatter-markdown'
     const template = fm
       .html
       .replace(/<(code\s.+)>/g, "<$1 v-pre>")
@@ -69,8 +55,8 @@ module.exports = function (source) {
       staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
     }
 
-    output += `
-      vue: {
+    addProperty('vue', `
+      {
         render: ${stringify(render)},
         staticRenderFns: ${stringify(staticRenderFns)},
         component: {
@@ -88,7 +74,7 @@ module.exports = function (source) {
           }
         }
       }
-    `;
+    `);
   }
 
   return `module.exports = { ${output} }`;
