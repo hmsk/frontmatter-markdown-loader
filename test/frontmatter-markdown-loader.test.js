@@ -1,4 +1,5 @@
-import Loader, { Mode } from "../index";
+import Loader from "../index";
+import Mode from "../mode";
 import { mount, createLocalVue } from "@vue/test-utils";
 import ChildComponent from "./child-component";
 import CodeConfusing from "./code-confusing";

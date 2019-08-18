@@ -1,5 +1,6 @@
 const loaderUtils = require('loader-utils')
 const frontmatter = require('front-matter')
+const Mode = require('./mode')
 
 const md = require('markdown-it')({
   html: true,
@@ -14,15 +15,7 @@ try {
 } catch (err) {
 }
 
-export const Mode = {
-  HTML: 'html',
-  BODY: 'body',
-  META: 'meta',
-  VUE_COMPONENT: 'vue-component',
-  VUE_RENDER_FUNCTIONS: 'vue-render-functions'
-};
-
-export default function (source) {
+module.exports = function (source) {
   if (this.cacheable) this.cacheable();
 
   const options = loaderUtils.getOptions(this) || {}
