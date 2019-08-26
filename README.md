@@ -20,167 +20,18 @@ tags:
 message
 ```
 
-is loaded as:
+is loadable as:
 
 ```js
 import fm from "something.md"
 
 fm.attributes // FrontMatter attributes => { subject: "Hello", tags: ["tag1", "tag2"] }
-fm.body // Markdown source => "# Title\n\nmessage\n"
 fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
 ```
 
-## Installation
+And there are some convenience features for Vue stack 😉
 
-```
-$ npm i -D frontmatter-markdown-loader
-```
-
-Or
-
-```
-$ yarn add -D frontmatter-markdown-loader
-```
-
-## Setup
-
-Configure the loader for Markdown files like:
-
-```js
-{
-  test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
-}
-```
-
-Then you can get frontmatter attributes and compiled markdown 🎉
-
-```js
-import fm from "something.md"
-```
-
-## Options
-
-### Use your own markdown compiler
-
-```js
-{
-  test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
-  options: {
-    markdown: (body) => {
-      return compileWithYourMDCompiler(body)
-    }
-  }
-}
-```
-
-As default, compiling markdown body with [markdown-it](https://www.npmjs.com/package/markdown-it) with allowing HTML. So behave as same as:
-
-```js
-const md = require('markdown-it')
-
-...
-
-{
-  test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
-  options: {
-    markdown: (body) => {
-      return md.render(body)
-    }
-  }
-}
-```
-
-### Vue template
-
-The loader could compile HTML section of files as Vue template. (Excepting code snipets as Markdown which will be compiled to `<code>`)
-
-Then you need to install `vue-template-compiler` and `vue-template-es2015-compiler` to your project (These are in optional dependencies).
-
-
-```js
-{
-  test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
-  options: {
-    vue: true
-  }
-}
-```
-
-By this option, the loader provides `vue.component` which is extendable as Vue's component
-
-```js
-import fm from "something.md"
-
-export default {
-  extends: fm.vue.component,
-  components: {
-    OtherComponent // If markdown has `<other-component>` in body, will work :)
-  }
-}
-```
-
-This component renders the compiled markdown including workable `OtherComponent` 🎉
-
-Here's [the sample project with vue-cli](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample)
-
-<details><summary>
-Or can take functions by compiled template as string `render`, `staticRenderFns` which are Vue component requires.
-</summary>
-
-```js
-import fm from "something.md"
-
-fm.vue.render //=> render function as string
-fm.vue.staticRenderFns //=> List of staticRender function as string
-```
-
-so, you can use them in your Vue component:
-
-```js
-import OtherComponent from "OtherComponent.vue"
-
-export default {
-  data () {
-    return {
-      templateRender: null
-    }
-  },
-
-  components: {
-    OtherComponent // If markdown has `<other-component>` in body, will work :)
-  },
-
-  render (createElement) {
-    return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
-  },
-
-  created () {
-    this.templateRender = new Function(fm.vue.render)();
-    this.$options.staticRenderFns = new Function(fm.vue.staticRenderFns)();
-  }
-}
-```
-</details>
-
-#### Component's root element
-
-Also you can give the class name of body html with `options.vue.root`.
-
-```js
-{
-  test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
-  options: {
-    vue: {
-      root: 'dynamicContent'
-    }
-  }
-}
-```
+See [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
 
 ## Inspired/Referred
 
