@@ -1,5 +1,6 @@
 module.exports = {
-  title: "frontmatter-markdown-loader",
+  title: 'frontmatter-markdown-loader',
+  base: '/frontmatter-markdown-loader/',
   themeConfig: {
     repo: 'hmsk/frontmatter-markdown-loader',
     nav: [
