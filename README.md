@@ -4,7 +4,7 @@
 [![CircleCI](https://img.shields.io/circleci/project/github/hmsk/frontmatter-markdown-loader/master.svg?style=for-the-badge)](https://circleci.com/gh/hmsk/frontmatter-markdown-loader/tree/master)
 
 
-Webpack Loader for: FrontMatter (.md) which returns Compiled HTML + Attributes (+ [Compiled object as a Vue component](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample))
+Webpack Loader for: FrontMatter (.md) which returns Compiled HTML + Attributes (+ [Object compiled as a Vue component](https://hmsk.github.io/frontmatter-markdown-loader/vue.html))
 
 This FrontMatter markdown file `something.md`:
 
@@ -31,17 +31,14 @@ fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
 
 And there are some convenience features for Vue stack 😉
 
-See [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
+See the [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
 
 ## Inspired/Referred
 
 - [egoist/vmark: Convert markdown to Vue component.](https://github.com/egoist/vmark)
 - [webpack-contrib/json-loader: json loader module for webpack](https://github.com/webpack-contrib/json-loader)
 
-## Contributor
-
-- [Daniel Roe / @danielroe](https://github.com/danielroe)
-
 ## License
 
-- [MIT](LICENSE) Copyright Kengo Hamasaki
+- [MIT](LICENSE) Copyright 2018-present Kengo Hamasaki
+- [Contributors](https://github.com/hmsk/frontmatter-markdown-loader/graphs/contributors)
