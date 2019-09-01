@@ -29,9 +29,13 @@ fm.attributes // FrontMatter attributes => { subject: "Hello", tags: ["tag1", "t
 fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
 ```
 
-And there are some convenience features for Vue stack 😉
+And there are [some convenience features for Vue stack](https://hmsk.github.io/frontmatter-markdown-loader/vue) 😉
 
-See the [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
+📚 See the [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
+
+## 🔰 You have trouble with missing object?
+
+The loader got the breaking changes in the latest major update. The article which you referred might premise on the old version. Check the installed version, if that says `1.x.y`, see [this guide](https://hmsk.github.io/frontmatter-markdown-loader/migration).
 
 ## Inspired/Referred
 

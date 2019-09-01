@@ -1,6 +1,8 @@
 # Vue compilation
 
-Further about `MODE.VUE_COMPONENT`, `MODE.VUE_RENDER_FUNCTIONS` in ["mode" option](/mode#vue-component).
+frontmatter-markdown-loader allows you to import the compiled markdown body as **Vue's render function**, **Vue component**.
+
+Those feature is enabled by `MODE.VUE_COMPONENT`, `MODE.VUE_RENDER_FUNCTIONS` in ["mode" option](mode#vue-component).
 
 ::: warning Additional dependencies
 To use this mode, your project need to install [vue-template-compiler](https://www.npmjs.com/package/vue-template-compiler) and [vue-template-es2015-compiler](https://www.npmjs.com/package/vue-template-es2015-compiler).

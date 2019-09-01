@@ -8,7 +8,7 @@ The loader accepts some options to configure.
 
 `options.mode` option requests what you can import from frontmatter markdown data.
 
-This option is added since 2.0.0. So see [Migration Guide](/migration) if you are using `1.x`.
+This option is added since 2.0.0. So see [Migration Guide](migration) if you are using `1.x`.
 
 ```js
 import Mode from 'frontmatter-markdown-loader/mode'
