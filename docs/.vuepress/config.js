@@ -14,7 +14,13 @@ module.exports = {
           ['/', 'Setup'],
           ['/options', 'Options'],
           ['/vue', 'Vue compilation'],
-          ['/samples', 'Sample']
+        ]
+      },
+      {
+        title: 'Samples',
+        collapsable: false,
+        children: [
+          ['/samples-vue', 'Vue App']
         ]
       },
       {
