@@ -144,7 +144,37 @@ To see the usage of `fm.vue.component`, see [this page](/vue).
 
 ## Markdown compiler
 
-You can specify the compiler for Markdown as you like. `options.markdown` expects the callback function which takes the string of markdown for its argument. And expects returning compiled HTML.
+By default, we use the [`markdown-it`](https://github.com/markdown-it/markdown-it) package for compiling the Markdown into HTML. There are several ways you can customize this behavior.
+
+If you want to pass custom options, you can do so by passing them to the `markdownIt` option parameter in your Webpack config:
+
+```js
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader'
+  options: {
+    markdownIt: { html: true },
+  }
+}
+```
+
+The example above is the default behavior, but there are [many more options available](https://markdown-it.github.io/markdown-it/#MarkdownIt.new).
+
+If you want to further customize the markdown-it instance (with [plugins](https://www.npmjs.com/search?q=keywords:markdown-it-plugin), for instance), you can also pass in your own instance of `markdown-it`:
+
+```js
+const markdownIt = require('markdown-it');
+const markdownItPrism = require('markdown-it-prism');
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader'
+  options: {
+    markdownIt: markdownIt({ html: true }).use(markdownItPrism),
+  }
+}
+```
+
+You can also specify a completely different compiler for Markdown if you like. `options.markdown` expects the callback function which takes the string of markdown for its argument. And expects returning compiled HTML.
 
 ```js
 {
@@ -153,24 +183,6 @@ You can specify the compiler for Markdown as you like. `options.markdown` expect
   options: {
     markdown: (body) => {
       return compileWithYourMDCompiler(body)
-    }
-  }
-}
-```
-
-As default, compiling markdown with [markdown-it](https://www.npmjs.com/package/markdown-it) with allowing HTML. So that's equivalent to:
-
-```js
-const md = require('markdown-it')({ html: true })
-
-...
-
-{
-  test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
-  options: {
-    markdown: (body) => {
-      return md.render(body)
     }
   }
 }
