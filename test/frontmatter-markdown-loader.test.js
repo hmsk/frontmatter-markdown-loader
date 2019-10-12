@@ -1,9 +1,11 @@
+import { mount, createLocalVue } from "@vue/test-utils";
+import markdownIt from "markdown-it";
+import nodeEval from "node-eval";
+
 import Loader from "../index";
 import Mode from "../mode";
-import { mount, createLocalVue } from "@vue/test-utils";
 import ChildComponent from "./child-component";
 import CodeConfusing from "./code-confusing";
-import nodeEval from "node-eval";
 
 let loaded;
 
@@ -26,6 +28,7 @@ tags:
 # Title
 
 GOOD \`BYE\` FRIEND
+CHEERS
 `;
 
 const markdownWithFrontmatterIncludingChildComponent = `---
@@ -61,7 +64,7 @@ describe("frontmatter-markdown-loader", () => {
     });
 
     it("returns compiled HTML for 'html' property", () => {
-      expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND</p>\n");
+      expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n");
     });
 
     it("returns frontmatter object for 'attributes' property", () => {
@@ -84,10 +87,44 @@ describe("frontmatter-markdown-loader", () => {
     });
   });
 
+  describe("markdown option", () => {
+    it("returns HTML with custom renderer", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { markdown: md => "<p>Compiled markdown by the custom compiler</p>" } });
+      expect(loaded.html).toBe("<p>Compiled markdown by the custom compiler</p>");
+    });
+
+    it("throws if both markdown and markdownIt are given", () => {
+      expect(() => {
+        load(markdownWithFrontmatter, { ...defaultContext, query: { markdown: md => "<p>custom</p>", markdownIt: "option" } });
+      }).toThrow();
+    });
+  });
+
+  describe("markdownId option", () => {
+    it("returns HTML with configured markdownIt: breaks option is enabled as configuration", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { markdownIt: { breaks: true } } });
+      expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND<br>\nCHEERS</p>\n");
+    });
+
+    it("returns HTML with configured markdownIt instance: breaks option is enabled by .enable", () => {
+      const markdownItInstance = markdownIt();
+      const defaultRender = markdownItInstance.link_open || function(tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options);
+      };
+      markdownItInstance.renderer.rules.paragraph_open = function (tokens, idx, options, env, self) {
+        tokens[idx].attrPush(['data-paragraph', 'hello']);
+        return defaultRender(tokens, idx, options, env, self);
+      };
+
+      load(markdownWithFrontmatter, { ...defaultContext, query: { markdownIt: markdownItInstance } });
+      expect(loaded.html).toBe("<h1>Title</h1>\n<p data-paragraph=\"hello\">GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n");
+    });
+  });
+
   describe("body mode is enabled", () => {
     it("returns raw markdown body for 'body' property", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.BODY] } });
-      expect(loaded.body).toBe("# Title\n\nGOOD `BYE` FRIEND\n");
+      expect(loaded.body).toBe("# Title\n\nGOOD `BYE` FRIEND\nCHEERS\n");
     });
   });
 
@@ -163,7 +200,7 @@ describe("frontmatter-markdown-loader", () => {
       it("returns functions to run as Vue component which has the correct template", () => {
         load(markdownWithFrontmatter, contextEnablingVueRenderFunctions({ vue: { root: "forJest" } }));
         const wrapper = mountComponent(buildVueComponent());
-        expect(wrapper.html()).toBe('<div class=\"forJest\"><h1>Title</h1> <p>GOOD <code>BYE</code> FRIEND</p></div>');
+        expect(wrapper.html()).toBe('<div class=\"forJest\"><h1>Title</h1> <p>GOOD <code>BYE</code> FRIEND\nCHEERS</p></div>');
       });
 
       it("returns functions to run as Vue component which includes child component", () => {
