@@ -180,7 +180,7 @@ const markdownItPrism = require('markdown-it-prism');
 }
 ```
 
-### custom compiler
+### Custom compiler
 
 To provide the custom compilation logic, `markdown` option accepts the callback function which takes the string of the markdown source for its argument. And expects the function returns compiled HTML.
 
