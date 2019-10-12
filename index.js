@@ -1,10 +1,7 @@
 const loaderUtils = require('loader-utils')
 const frontmatter = require('front-matter')
 const Mode = require('./mode')
-
-const md = require('markdown-it')({
-  html: true,
-});
+const markdownIt = require('markdown-it');
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
@@ -13,6 +10,34 @@ try {
   vueCompiler = require('vue-template-compiler')
   vueCompilerStripWith = require('vue-template-es2015-compiler')
 } catch (err) {
+}
+
+function getNormalizedMarkdownCompiler(options) {
+  if (options.markdown && options.markdownIt) {
+    throw new Error(
+      "Both markdown and markdownIt options were specified. This is not supported. \n" +
+      "Please refer to the documentation for usage: \n" +
+      "https://hmsk.github.io/frontmatter-markdown-loader/options.html#markdown-compiler"
+    );
+  }
+
+  // If you've specified the markdown option, hand over control
+  if (options.markdown) {
+    return { render: options.markdown };
+  }
+
+  // If you've passed in a MarkdownIt instance, just use that
+  if (options.markdownIt instanceof markdownIt) {
+    return options.markdownIt;
+  }
+
+  // Configuration object? Pass it to our default compiler
+  if (typeof options.markdownIt === 'object') {
+    return markdownIt(options.markdownIt);
+  }
+
+  // If no configuration is passed - use a sensible default
+  return markdownIt({ html: true });
 }
 
 module.exports = function (source) {
@@ -30,7 +55,8 @@ module.exports = function (source) {
   };
 
   const fm = frontmatter(source);
-  fm.html = options.markdown ? options.markdown(fm.body) : md.render(fm.body);
+  const markdownCompiler = getNormalizedMarkdownCompiler(options);
+  fm.html = markdownCompiler.render(fm.body);
 
   addProperty('attributes', stringify(fm.attributes));
   if (enabled(Mode.HTML)) addProperty('html', stringify(fm.html));
