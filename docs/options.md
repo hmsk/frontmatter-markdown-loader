@@ -142,25 +142,31 @@ fm.vue.staticRenderFns //=> List of staticRender function as string
 To see the usage of `fm.vue.component`, see [this page](/vue).
 :::
 
-## Markdown compiler
+## Markdown compilation
 
-By default, we use the [`markdown-it`](https://github.com/markdown-it/markdown-it) package for compiling the Markdown into HTML. There are several ways you can customize this behavior.
+### Configure markdown-it
 
-If you want to pass custom options, you can do so by passing them to the `markdownIt` option parameter in your Webpack config:
+By default, the loader compiles markdown with [markdown-it](https://github.com/markdown-it/markdown-it) package. `markdownIt` option accepts the configuration to overwrite the default.
 
 ```js
 {
   test: /\.md$/,
   loader: 'frontmatter-markdown-loader'
   options: {
-    markdownIt: { html: true },
+    markdownIt: {
+      html: true,
+      linkify: true,
+      breaks: true
+    }
   }
 }
 ```
 
-The example above is the default behavior, but there are [many more options available](https://markdown-it.github.io/markdown-it/#MarkdownIt.new).
+[Refer markdown-it document for the further about the configuration](https://github.com/markdown-it/markdown-it#init-with-presets-and-options).
 
-If you want to further customize the markdown-it instance (with [plugins](https://www.npmjs.com/search?q=keywords:markdown-it-plugin), for instance), you can also pass in your own instance of `markdown-it`:
+If `markdownIt` option isn't given, the loader uses `markdown-it` with just `{ html: true}` as default.
+
+`markdonIt` option also accepts the instance of a markdown-it rederer (with [plugins](https://www.npmjs.com/search?q=keywords:markdown-it-plugin), for instance):
 
 ```js
 const markdownIt = require('markdown-it');
@@ -169,12 +175,14 @@ const markdownItPrism = require('markdown-it-prism');
   test: /\.md$/,
   loader: 'frontmatter-markdown-loader'
   options: {
-    markdownIt: markdownIt({ html: true }).use(markdownItPrism),
+    markdownIt: markdownIt({ html: true }).use(markdownItPrism)
   }
 }
 ```
 
-You can also specify a completely different compiler for Markdown if you like. `options.markdown` expects the callback function which takes the string of markdown for its argument. And expects returning compiled HTML.
+### custom compiler
+
+To provide the custom compilation logic, `markdown` option accepts the callback function which takes the string of the markdown source for its argument. And expects the function returns compiled HTML.
 
 ```js
 {
@@ -182,7 +190,7 @@ You can also specify a completely different compiler for Markdown if you like. `
   loader: 'frontmatter-markdown-loader'
   options: {
     markdown: (body) => {
-      return compileWithYourMDCompiler(body)
+      return compileWithCustomCompiler(body)
     }
   }
 }
