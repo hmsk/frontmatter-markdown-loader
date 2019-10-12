@@ -17,7 +17,7 @@ function getNormalizedMarkdownCompiler(options) {
     throw new Error(
       "Both markdown and markdownIt options were specified. This is not supported. \n" +
       "Please refer to the documentation for usage: \n" +
-      "https://hmsk.github.io/frontmatter-markdown-loader/options.html#markdown-compiler"
+      "https://hmsk.github.io/frontmatter-markdown-loader/options.html#markdown-compilation"
     );
   }
 
