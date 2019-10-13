@@ -88,6 +88,10 @@ describe("frontmatter-markdown-loader", () => {
     it("doesn't return 'vue' property", () => {
       expect(loaded.vue).toBeUndefined();
     });
+
+    it("doesn't return 'react' property", () => {
+      expect(loaded.react).toBeUndefined();
+    });
   });
 
   describe("markdown option", () => {
