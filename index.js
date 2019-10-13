@@ -5,10 +5,15 @@ const markdownIt = require('markdown-it');
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
-let vueCompiler, vueCompilerStripWith
+let vueCompiler, vueCompilerStripWith, babelCore
 try {
   vueCompiler = require('vue-template-compiler')
   vueCompilerStripWith = require('vue-template-es2015-compiler')
+} catch (err) {
+}
+
+try {
+  babelCore = require('@babel/core')
 } catch (err) {
 }
 
@@ -111,6 +116,30 @@ module.exports = function (source) {
     }
 
     addProperty('vue', `{${vueOutput}}`);
+  }
+
+  if (enabled(Mode.REACT)) {
+    const compiled = babelCore
+      .transformSync(`
+        const markdown =
+          <div>
+            ${fm.html}
+          </div>
+        `, {
+        presets: ['@babel/preset-react']
+      });
+
+    const reactComponent = `
+      function (props) {
+        Object.entries(props).forEach(([key, value]) => {
+          this[key] = value;
+        })
+        const React = require('react');
+        ${compiled.code}
+        return markdown;
+      }
+    `
+    addProperty('react', reactComponent);
   }
 
   return `module.exports = { ${output} }`;
