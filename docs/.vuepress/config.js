@@ -13,7 +13,8 @@ module.exports = {
         children: [
           ['/', 'Setup'],
           ['/options', 'Options'],
-          ['/vue', 'Vue compilation'],
+          ['/vue', 'Vue Compoent/Renderers'],
+          ['/react', 'React Component']
         ]
       },
       {
