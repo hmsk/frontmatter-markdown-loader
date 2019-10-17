@@ -94,6 +94,20 @@ fm.meta //=> { resourcePath: "/somepath/something.md" }
 
 Currently, only `resourcePath` is available which returns [the path for the file in Webpack's context](https://webpack.js.org/api/loaders/#thisresourcepath).
 
+### React component
+
+`Mode.REACT` requests to get function which renders React component.
+
+```js
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader'
+  options: {
+    mode: [Mode.REACT]
+  }
+}
+```
+
 ### Vue component
 
 `Mode.VUE_COMPONENT` requests to get the extendable component object of Vue.
@@ -142,20 +156,6 @@ fm.vue.staticRenderFns //=> List of staticRender function as string
 ::: tip How to use in Vue
 To see the usage of `fm.vue.component`, see [this page](/vue).
 :::
-
-### React component
-
-`Mode.VUE_COMPONENT` requests to get the extendable component object of Vue.
-
-```js
-{
-  test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
-  options: {
-    mode: [Mode.REACT]
-  }
-}
-```
 
 ```js
 import fm from "something.md"

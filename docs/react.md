@@ -2,6 +2,10 @@
 
 By `Mode.REACT`, importing `.md` returns `react` property which is renderable React component as well as `Mode.VUE_COMPONENT`.
 
+::: warning Additional dependencies
+To use this mode, your project need to be installed [@babel/core](https://www.npmjs.com/package/@babel/core) and [@babel/preset-react](https://www.npmjs.com/package/@babel/preset-react).
+:::
+
 ```js
 import React from 'react'
 
