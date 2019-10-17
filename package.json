@@ -1,7 +1,7 @@
 {
   "name": "frontmatter-markdown-loader",
-  "version": "2.2.0",
-  "description": "Webpack loader for Front Matter-ed Markdown file to get frontmatter attributes and compiled Vue component",
+  "version": "2.3.0-0",
+  "description": "Webpack loader for Front Matter Markdown file to get front matter attributes, compiled markdown and React/Vue component which renders compiled markdown",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -19,7 +19,8 @@
     "markdown",
     "frontmatter",
     "vue",
-    "loader"
+    "loader",
+    "react"
   ],
   "author": "Kengo Hamasaki <k.hamasaki@gmail.com>",
   "license": "MIT",
@@ -33,15 +34,21 @@
     "markdown-it": "^10.0.0"
   },
   "optionalDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-react": "^7.6.0",
     "vue-template-compiler": "^2.5.0",
     "vue-template-es2015-compiler": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.6.4",
     "@babel/preset-env": "7.6.3",
+    "@babel/preset-react": "7.6.3",
+    "@vue/babel-preset-app": "^3.12.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "jest": "24.9.0",
     "node-eval": "2.0.0",
+    "react": "16.10.2",
+    "react-test-renderer": "16.10.2",
     "vue": "2.6.10",
     "vue-jest": "4.0.0-beta.2",
     "vue-template-compiler": "2.6.10",
@@ -53,7 +60,8 @@
     "testURL": "http://localhost",
     "moduleFileExtensions": [
       "js",
-      "vue"
+      "vue",
+      "json"
     ],
     "transform": {
       "^.+\\.js$": "babel-jest",

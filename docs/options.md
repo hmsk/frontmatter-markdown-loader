@@ -24,6 +24,7 @@ You may not want to import `frontmatter-markdown-loader/mode`. Then you can just
 - `Mode.META` -> `"meta"`
 - `Mode.VUE_COMPONENT` -> `"vue-component"`
 - `Mode.VUE_RENDER_FUNCTIONS` -> `"vue-render-functions"`
+- `Mode.REACT` -> `"react-component"`
 :::
 
 ### Default
@@ -140,6 +141,30 @@ fm.vue.staticRenderFns //=> List of staticRender function as string
 
 ::: tip How to use in Vue
 To see the usage of `fm.vue.component`, see [this page](/vue).
+:::
+
+### React component
+
+`Mode.VUE_COMPONENT` requests to get the extendable component object of Vue.
+
+```js
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader'
+  options: {
+    mode: [Mode.REACT]
+  }
+}
+```
+
+```js
+import fm from "something.md"
+
+fm.react //=> The function which is renderable as React component which has compiled markdown as template
+```
+
+::: tip How to use in React
+To see the usage of `fm.react`, see [this page](/react).
 :::
 
 ## Markdown compilation

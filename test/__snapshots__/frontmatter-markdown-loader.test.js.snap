@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontmatter-markdown-loader react mode returns renderable React component 1`] = `
+<div>
+  <h1>
+    Title
+  </h1>
+  <p>
+    GOOD 
+    <code>
+      BYE
+    </code>
+     FRIEND CHEERS
+  </p>
+</div>
+`;
+
+exports[`frontmatter-markdown-loader react mode returns renderable React component with accepting child components through props 1`] = `
+<div>
+  <h1>
+    Title
+  </h1>
+  <p>
+    HELLO
+    <strong>
+      I am a child
+    </strong>
+  </p>
+  <p>
+    <i>
+      I am another
+    </i>
+  </p>
+</div>
+`;

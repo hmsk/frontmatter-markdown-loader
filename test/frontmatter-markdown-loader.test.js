@@ -1,4 +1,7 @@
 import { mount, createLocalVue } from "@vue/test-utils";
+import reactRenderer from 'react-test-renderer';
+import React from 'react';
+
 import markdownIt from "markdown-it";
 import nodeEval from "node-eval";
 
@@ -16,7 +19,7 @@ const defaultContext = {
 
 const load = (source, context = defaultContext) => {
   const rawLoaded = Loader.call(context, source);
-  loaded = nodeEval(rawLoaded);
+  loaded = nodeEval(rawLoaded, "sample.md");
 }
 
 const markdownWithFrontmatter = `---
@@ -84,6 +87,10 @@ describe("frontmatter-markdown-loader", () => {
 
     it("doesn't return 'vue' property", () => {
       expect(loaded.vue).toBeUndefined();
+    });
+
+    it("doesn't return 'react' property", () => {
+      expect(loaded.react).toBeUndefined();
     });
   });
 
@@ -252,4 +259,36 @@ describe("frontmatter-markdown-loader", () => {
       });
     });
   });
+
+  const markdownWithFrontmatterIncludingPascalChildComponent = `---
+subject: Hello
+tags:
+  - tag1
+  - tag2
+---
+# Title
+
+HELLO
+<ChildComponent />
+
+<AnotherChild>I am another</AnotherChild>
+`;
+
+  describe("react mode", () => {
+    it("returns renderable React component", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.REACT] } });
+      const MarkdownComponent = loaded.react;
+      const rendered = reactRenderer.create(<MarkdownComponent />);
+      expect(rendered.toJSON()).toMatchSnapshot();
+    });
+
+    it("returns renderable React component with accepting child components through props", () => {
+      load(markdownWithFrontmatterIncludingPascalChildComponent, { ...defaultContext, query: { mode: [Mode.REACT] } });
+      const MarkdownComponent = loaded.react;
+      const ChildComponent = () => <strong>I am a child</strong>
+      const AnotherChild = ({ children }) => <i>{children}</i>
+      const rendered = reactRenderer.create(<MarkdownComponent ChildComponent={ChildComponent} AnotherChild={AnotherChild} />);
+      expect(rendered.toJSON()).toMatchSnapshot();
+    });
+  })
 });

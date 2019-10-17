@@ -1,10 +1,13 @@
 # frontmatter-markdown-loader [![frontmatter-markdown-loader Dev Token](https://badge.devtoken.rocks/frontmatter-markdown-loader)](https://devtoken.rocks/package/frontmatter-markdown-loader)
 
 [![npm](https://img.shields.io/npm/v/frontmatter-markdown-loader.svg?style=for-the-badge)](https://www.npmjs.com/package/frontmatter-markdown-loader)
-[![CircleCI](https://img.shields.io/circleci/project/github/hmsk/frontmatter-markdown-loader/master.svg?style=for-the-badge)](https://circleci.com/gh/hmsk/frontmatter-markdown-loader/tree/master)
 
+Webpack Loader for [Front Matter](https://jekyllrb.com/docs/front-matter/) files (.md) which returns:
 
-Webpack Loader for: FrontMatter (.md) which returns Compiled HTML + Attributes (+ [Object compiled as a Vue component](https://hmsk.github.io/frontmatter-markdown-loader/vue.html))
+- Front Matter attributes
+- Compiled markdown as HTML
+- [Compiled markdown as a React component](https://hmsk.github.io/frontmatter-markdown-loader/react.html))
+- [Compiled markdown as a Vue component](https://hmsk.github.io/frontmatter-markdown-loader/vue.html))
 
 This FrontMatter markdown file `something.md`:
 
@@ -27,9 +30,9 @@ import fm from "something.md"
 
 fm.attributes // FrontMatter attributes => { subject: "Hello", tags: ["tag1", "tag2"] }
 fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
+fm.react // Component function for React which renders compiled markdown (Disabled as default)
+fm.vue.compoennt // Extendable component object for Vue which renders compiled markdown (Disabled as default)
 ```
-
-And there are [some convenience features for Vue stack](https://hmsk.github.io/frontmatter-markdown-loader/vue) 😉
 
 📚 See the [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
 
@@ -44,5 +47,5 @@ The loader got the breaking changes in the latest major update. The article whic
 
 ## License
 
-- [MIT](LICENSE) Copyright 2018-present Kengo Hamasaki
-- [Contributors](https://github.com/hmsk/frontmatter-markdown-loader/graphs/contributors)
+- [MIT License](LICENSE) Copyright 2018-present Kengo Hamasaki
+- And thanks for [Contributors](https://github.com/hmsk/frontmatter-markdown-loader/graphs/contributors)
