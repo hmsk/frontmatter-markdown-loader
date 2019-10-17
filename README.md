@@ -6,8 +6,8 @@ Webpack Loader for [Front Matter](https://jekyllrb.com/docs/front-matter/) files
 
 - Front Matter attributes
 - Compiled markdown as HTML
-- [Compiled markdown as a React component](https://hmsk.github.io/frontmatter-markdown-loader/react.html))
-- [Compiled markdown as a Vue component](https://hmsk.github.io/frontmatter-markdown-loader/vue.html))
+- [Compiled markdown as a React component](https://hmsk.github.io/frontmatter-markdown-loader/react.html)
+- [Compiled markdown as a Vue component](https://hmsk.github.io/frontmatter-markdown-loader/vue.html)
 
 This FrontMatter markdown file `something.md`:
 
