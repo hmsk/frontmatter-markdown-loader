@@ -5,10 +5,11 @@ const markdownIt = require('markdown-it');
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
-let vueCompiler, vueCompilerStripWith, babelCore
+let compileVueTemplate, vueCompiler, vueCompilerStripWith, babelCore
 try {
   vueCompiler = require('vue-template-compiler')
   vueCompilerStripWith = require('vue-template-es2015-compiler')
+  compileVueTemplate = require('@vue/component-compiler-utils').compileTemplate
 } catch (err) {
 }
 
@@ -52,9 +53,12 @@ module.exports = function (source) {
   const requestedMode = Array.isArray(options.mode) ? options.mode : [Mode.HTML];
   const enabled = (mode) => requestedMode.includes(mode);
 
-  let output = '';
+  let exported = '', prependOutput = '';
+  const addPrepend = (code) => {
+    prependOutput = prependOutput.concat(`${code}\n`)
+  };
   const addProperty = (key, value) => {
-    output += `
+    exported += `
       ${key}: ${value},
     `;
   };
@@ -73,26 +77,33 @@ module.exports = function (source) {
     addProperty('meta', stringify(meta));
   }
 
-  if ((enabled(Mode.VUE_COMPONENT) || enabled(Mode.VUE_RENDER_FUNCTIONS)) && vueCompiler && vueCompilerStripWith) {
+  if ((enabled(Mode.VUE_COMPONENT) || enabled(Mode.VUE_RENDER_FUNCTIONS)) && vueCompiler && vueCompilerStripWith && compileVueTemplate) {
     const rootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
     const template = fm
       .html
       .replace(/<(code\s.+)>/g, "<$1 v-pre>")
       .replace(/<code>/g, "<code v-pre>");
-    const compiled = vueCompiler.compile(`<div class="${rootClass}">${template}</div>`)
-    const render = `return ${vueCompilerStripWith(`function render() { ${compiled.render} }`)}`
 
-    let staticRenderFns = '';
-    if (compiled.staticRenderFns.length > 0) {
-      staticRenderFns = `return ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)}`
-    }
+    const compileOptions = {
+      source: `<div class="${rootClass}">${template}</div>`,
+      filename: this.resourcePath,
+      compiler: vueCompiler,
+      compilerOptions: {
+        outputSourceRange: true
+      },
+      transformAssetUrls: true,
+      isProduction: process.env.NODE_ENV === 'production'
+    };
+
+    const compiled = compileVueTemplate(compileOptions);
+    addPrepend(`const extractVueFunctions = () => {\n${compiled.code}\nreturn { render, staticRenderFns }\n}\nconst vueFunctions = extractVueFunctions()`);
 
     let vueOutput = '';
 
     if (enabled(Mode.VUE_RENDER_FUNCTIONS)) {
       vueOutput += `
-        render: ${stringify(render)},
-        staticRenderFns: ${stringify(staticRenderFns)},
+        render: vueFunctions.render,
+        staticRenderFns: vueFunctions.staticRenderFns,
       `;
     }
 
@@ -108,8 +119,8 @@ module.exports = function (source) {
             return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
           },
           created: function () {
-            this.templateRender = ${vueCompilerStripWith(`function render() { ${compiled.render} }`)};
-            this.$options.staticRenderFns = ${vueCompilerStripWith(`[${compiled.staticRenderFns.map(fn => `function () { ${fn} }`).join(',')}]`)};
+            this.templateRender = vueFunctions.render;
+            this.$options.staticRenderFns = vueFunctions.staticRenderFns;
           }
         }
       `;
@@ -142,5 +153,5 @@ module.exports = function (source) {
     addProperty('react', reactComponent);
   }
 
-  return `module.exports = { ${output} }`;
+  return `${prependOutput}\nmodule.exports = { ${exported} }`;
 }
