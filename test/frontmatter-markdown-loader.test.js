@@ -47,7 +47,7 @@ HELLO
 
 <code-confusing />
 
-<img src="./avatar.png.js" />
+![Avatar Image](./avatar.png.js)
 
 \`\`\`html
 <child-component>{{ test->() }}</child-component>
