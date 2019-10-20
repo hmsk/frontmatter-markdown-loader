@@ -5,10 +5,9 @@ const markdownIt = require('markdown-it');
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
-let compileVueTemplate, vueCompiler, vueCompilerStripWith, babelCore
+let compileVueTemplate, vueCompiler, babelCore
 try {
   vueCompiler = require('vue-template-compiler')
-  vueCompilerStripWith = require('vue-template-es2015-compiler')
   compileVueTemplate = require('@vue/component-compiler-utils').compileTemplate
 } catch (err) {
 }
@@ -77,7 +76,7 @@ module.exports = function (source) {
     addProperty('meta', stringify(meta));
   }
 
-  if ((enabled(Mode.VUE_COMPONENT) || enabled(Mode.VUE_RENDER_FUNCTIONS)) && vueCompiler && vueCompilerStripWith && compileVueTemplate) {
+  if ((enabled(Mode.VUE_COMPONENT) || enabled(Mode.VUE_RENDER_FUNCTIONS)) && vueCompiler && compileVueTemplate) {
     const rootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
     const template = fm
       .html

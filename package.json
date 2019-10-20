@@ -37,8 +37,7 @@
     "@babel/core": "^7.6.0",
     "@babel/preset-react": "^7.6.0",
     "@vue/component-compiler-utils": "^3.0.0",
-    "vue-template-compiler": "^2.5.0",
-    "vue-template-es2015-compiler": "^1.6.0"
+    "vue-template-compiler": "^2.5.0"
   },
   "devDependencies": {
     "@babel/core": "7.6.4",
@@ -54,7 +53,6 @@
     "vue": "2.6.10",
     "vue-jest": "4.0.0-beta.2",
     "vue-template-compiler": "2.6.10",
-    "vue-template-es2015-compiler": "1.9.1",
     "vuepress": "1.2.0"
   },
   "jest": {
