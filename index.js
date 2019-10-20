@@ -129,6 +129,8 @@ module.exports = function (source) {
   }
 
   if (enabled(Mode.REACT)) {
+    addPrepend(`const React = require('react')`);
+
     const compiled = babelCore
       .transformSync(`
         const markdown =
@@ -143,8 +145,7 @@ module.exports = function (source) {
       function (props) {
         Object.entries(props).forEach(([key, value]) => {
           this[key] = value;
-        })
-        const React = require('react');
+        });
         ${compiled.code}
         return markdown;
       }
