@@ -90,7 +90,7 @@ module.exports = function (source) {
       compilerOptions: {
         outputSourceRange: true
       },
-      transformAssetUrls: true,
+      transformAssetUrls: (options.vue && options.vue.transformAssetUrls) ? options.vue.transformAssetUrls : true,
       isProduction: process.env.NODE_ENV === 'production'
     };
 

@@ -246,7 +246,7 @@ describe("frontmatter-markdown-loader", () => {
         expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
       });
 
-      it("replace image", () => {
+      it("transforms asset's URL as default", () => {
         load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
         const component = {
           extends: loaded.vue.component,
@@ -254,6 +254,16 @@ describe("frontmatter-markdown-loader", () => {
         };
         const wrapper = mountComponent(component);
         expect(wrapper.find("img").attributes("src")).toBe("avatar-through-require.png");
+      });
+
+      it("doesn't transform asset's URL as configured", () => {
+        load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent({ vue: { transformAssetUrls: { img: null } } }));
+        const component = {
+          extends: loaded.vue.component,
+          components: { ChildComponent, CodeConfusing }
+        };
+        const wrapper = mountComponent(component);
+        expect(wrapper.find("img").attributes("src")).toBe("./avatar.png.js");
       });
 
       it("avoids compiling code snipets on markdown", () => {
