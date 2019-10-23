@@ -221,7 +221,11 @@ To provide the custom compilation logic, `markdown` option accepts the callback 
 }
 ```
 
-## Vue's root element
+## Vue Compilation
+
+### Class name for root `div` element
+
+`vue.root` option configures the class name of the root `div` element on Vue component's template.
 
 ```js
 {
@@ -235,4 +239,64 @@ To provide the custom compilation logic, `markdown` option accepts the callback 
 }
 ```
 
-can specify the class name of the root element on the imported Vue's template.
+By this configuration, the HTML in the below will be rendered by the Vue component.
+
+```js
+<div class="dynamicContent">
+  <h1>Title</h1>
+  <p>Main sentences</p>
+</div>
+```
+
+Default is `frontmatter-markdown`.
+
+### Assets transformation
+
+`vue.transformAssetUrls` configures assets handling on HTML which expects an key-value pair with element's name for key, an attribute names as array for value.
+
+Thus, `{ img: ['src', 'data-src'] }` means, `img` tag's `src` attribute and `data-src` attribute.
+
+Matched attributes are replaced with `require(originalValue)` on Vue template compilation. So, Webpack treats them as other resources. Typically, `file-loader`, `url-loader` gives Base 64 string, another path with asset's id. [Vue CLI App](https://cli.vuejs.org/guide/html-and-static-assets.html#static-assets-handling) and [Nuxt.js](https://nuxtjs.org/guide/assets#webpack) works with this behavior harmonically.
+
+Default is `true` which means:
+
+```js
+{
+  video: ['src', 'poster'],
+  source: 'src',
+  img: 'src',
+  image: ['xlink:href', 'href'],
+  use: ['xlink:href', 'href']
+}
+```
+
+This option will be merged with the default.
+
+```js
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader'
+  options: {
+    vue: {
+      transformAssetUrls: {
+        img: ['src', 'data-src']
+      }
+    }
+  }
+}
+```
+
+So, the configuration becomes eventually:
+
+```diff
+{
+  video: ['src', 'poster'],
+  source: 'src',
+- img: 'src',
++ img: ['src', 'data-src']
+  image: ['xlink:href', 'href'],
+  use: ['xlink:href', 'href']
+}
+```
+
+To disable all completely, just give `false`.

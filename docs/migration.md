@@ -1,4 +1,30 @@
-# Migration from 1.x
+# Migrate to `3.*`
+
+If you're using `vue.component`, `vue.render` or `vue.staticRenderFns` by importing.
+
+On the template for Vue component by compiling markdown,
+
+- Source attributes for `img`, `video`, `source`, `image`, `use` tag
+- ![alt text](Image URL) on Markdown
+
+are transformed as Webpack env's assets like `require(originalPath)` as default.
+
+To disable, give `vue.transformAssetUrls: false`.
+
+```js
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader'
+  options: {
+    mode: [Mode.VUE_COMPONENT]
+    vue: {
+      transformAssetUrls: false
+    }
+  }
+}
+```
+
+# Migrate to `2.*`/`3.*` from `1.*`
 
 From `2.0.0`, `mode` is added to load contents selectively. That was breaking change but compresses the build size a lot.
 
