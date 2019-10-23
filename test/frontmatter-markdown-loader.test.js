@@ -266,6 +266,16 @@ describe("frontmatter-markdown-loader", () => {
         expect(wrapper.find("img").attributes("src")).toBe("./avatar.png.js");
       });
 
+      it("doesn't transform asset's URL as disabled", () => {
+        load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent({ vue: { transformAssetUrls: false } }));
+        const component = {
+          extends: loaded.vue.component,
+          components: { ChildComponent, CodeConfusing }
+        };
+        const wrapper = mountComponent(component);
+        expect(wrapper.find("img").attributes("src")).toBe("./avatar.png.js");
+      });
+
       it("avoids compiling code snipets on markdown", () => {
         load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
         const component = {
