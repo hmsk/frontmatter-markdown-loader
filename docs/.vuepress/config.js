@@ -28,7 +28,7 @@ module.exports = {
         title: 'Migration',
         collapsable: false,
         children: [
-          ['/migration', 'Migration from 1.x'],
+          ['/migration', 'If you have update major version'],
         ]
       }
     ]

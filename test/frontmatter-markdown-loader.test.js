@@ -43,9 +43,11 @@ tags:
 # Title
 
 HELLO
-<child-component>
+<child-component />
 
 <code-confusing />
+
+![Avatar Image](./avatar.png.js)
 
 \`\`\`html
 <child-component>{{ test->() }}</child-component>
@@ -165,8 +167,8 @@ describe("frontmatter-markdown-loader", () => {
         },
 
         created: function () {
-          this.templateRender = new Function(loaded.vue.render)();
-          this.$options.staticRenderFns = new Function(loaded.vue.staticRenderFns)();
+          this.templateRender = loaded.vue.render;
+          this.$options.staticRenderFns = loaded.vue.staticRenderFns;
         }
       }
     };
@@ -242,6 +244,36 @@ describe("frontmatter-markdown-loader", () => {
         const wrapper = mountComponent(component);
         expect(wrapper.find(ChildComponent).exists()).toBe(true);
         expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
+      });
+
+      it("transforms asset's URL as default", () => {
+        load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
+        const component = {
+          extends: loaded.vue.component,
+          components: { ChildComponent, CodeConfusing }
+        };
+        const wrapper = mountComponent(component);
+        expect(wrapper.find("img").attributes("src")).toBe("avatar-through-require.png");
+      });
+
+      it("doesn't transform asset's URL as configured", () => {
+        load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent({ vue: { transformAssetUrls: { img: null } } }));
+        const component = {
+          extends: loaded.vue.component,
+          components: { ChildComponent, CodeConfusing }
+        };
+        const wrapper = mountComponent(component);
+        expect(wrapper.find("img").attributes("src")).toBe("./avatar.png.js");
+      });
+
+      it("doesn't transform asset's URL as disabled", () => {
+        load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent({ vue: { transformAssetUrls: false } }));
+        const component = {
+          extends: loaded.vue.component,
+          components: { ChildComponent, CodeConfusing }
+        };
+        const wrapper = mountComponent(component);
+        expect(wrapper.find("img").attributes("src")).toBe("./avatar.png.js");
       });
 
       it("avoids compiling code snipets on markdown", () => {
