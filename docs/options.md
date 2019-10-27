@@ -149,8 +149,8 @@ To see the usage of `fm.vue.component`, see [this page](vue).
 ```js
 import fm from "something.md"
 
-fm.vue.render //=> render function as string
-fm.vue.staticRenderFns //=> List of staticRender function as string
+fm.vue.render
+fm.vue.staticRenderFns
 ```
 
 ::: tip How to use in Vue

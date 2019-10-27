@@ -1,15 +1,15 @@
 # Migrate to `3.*`
 
-If you're using `vue.component`, `vue.render` or `vue.staticRenderFns` by importing.
+If you're using `vue.component`, `vue.render` or `vue.staticRenderFns` by importing. The upgrade may affect your project.
 
 On the template for Vue component by compiling markdown,
 
 - Source attributes for `img`, `video`, `source`, `image`, `use` tag
-- ![alt text](Image URL) on Markdown
+- `![alt text](Image URL)` on Markdown
 
-are transformed as Webpack env's assets like `require(originalPath)` as default.
+are transformed as Webpack env's assets like `require(originalPath)` as default. So, check each element is working as you intended.
 
-To disable, give `vue.transformAssetUrls: false`.
+To disable this transformation, give `vue.transformAssetUrls: false`.
 
 ```js
 {
@@ -20,6 +20,36 @@ To disable, give `vue.transformAssetUrls: false`.
     vue: {
       transformAssetUrls: false
     }
+  }
+}
+```
+
+And `vue.render`, `vue.staticRenderFns` becomes to return functions instead of string of functions.
+
+```diff
+import fm from "something.md"
+import OtherComponent from "OtherComponent.vue"
+
+export default {
+  data () {
+    return {
+      templateRender: null
+    }
+  },
+
+  components: {
+    OtherComponent // If markdown has `<other-component>` in body, will work :)
+  },
+
+  render (createElement) {
+    return this.templateRender ? this.templateRender() : createElement("div", "Rendering");
+  },
+
+  created () {
+-    this.templateRender = new Function(fm.vue.render)();
+-    this.$options.staticRenderFns = new Function(fm.vue.staticRenderFns)()
++    this.templateRender = fm.vue.render;
++    this.$options.staticRenderFns = fm.vue.staticRenderFns;
   }
 }
 ```
