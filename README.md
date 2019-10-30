@@ -31,7 +31,7 @@ import fm from "something.md"
 fm.attributes // FrontMatter attributes => { subject: "Hello", tags: ["tag1", "tag2"] }
 fm.html // Compiled markdown as HTML => "<h1>Title</h1>\n<p>message</p>\n"
 fm.react // Component function for React which renders compiled markdown (Disabled as default)
-fm.vue.compoennt // Extendable component object for Vue which renders compiled markdown (Disabled as default)
+fm.vue.component // Extendable component object for Vue which renders compiled markdown (Disabled as default)
 ```
 
 📚 See the [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
