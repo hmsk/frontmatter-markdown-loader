@@ -4,6 +4,8 @@ By `Mode.REACT`, importing `.md` returns `react` property which is renderable Re
 
 ::: warning Additional dependencies
 To use this mode, your project need to be installed [@babel/core](https://www.npmjs.com/package/@babel/core) and [@babel/preset-react](https://www.npmjs.com/package/@babel/preset-react).
+
+`react` installs both implicitly, for the instance. So you may not install them depends on your project.
 :::
 
 ```js
