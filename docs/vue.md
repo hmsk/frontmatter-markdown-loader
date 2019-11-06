@@ -12,6 +12,8 @@ To use this mode, your project need to be installed some dependencies.
 - [vue-template-compiler](https://www.npmjs.com/package/vue-template-compiler)
 - [@vue/component-compiler-utils](https://www.npmjs.com/package/@vue/component-compiler-utils)
 
+In Vue CLI app, `@vue/component-compiler-utils` are installed. In Nuxt.js app, both are installed. So you may not install them explicitly.
+
 ### Until 2.3.0
 
 - [vue-template-compiler](https://www.npmjs.com/package/vue-template-compiler)

@@ -182,6 +182,31 @@ describe("frontmatter-markdown-loader", () => {
         }
       });
 
+      describe("missing implicit dependencies", () => {
+        afterEach(() => {
+          jest.unmock("vue-template-compiler");
+          jest.unmock("@vue/component-compiler-utils");
+        });
+
+        it("throw if vue-template|compiler is not installed in the project", () => {
+          jest.mock('vue-template-compiler', () => {
+            throw new Error();
+          });
+          expect(() => {
+            load(markdownWithFrontmatter, contextEnablingVueRenderFunctions());
+          }).toThrow();
+        });
+
+        it("throw if @vue/component-compiler-utils is not installed in the project", () => {
+          jest.mock("@vue/component-compiler-utils", () => {
+            throw new Error();
+          });
+          expect(() => {
+            load(markdownWithFrontmatter, contextEnablingVueRenderFunctions());
+          }).toThrow();
+        });
+      });
+
       it("doesn't return for 'vue.component'", () => {
         load(markdownWithFrontmatter, contextEnablingVueRenderFunctions());
         expect(loaded.vue.component).not.toBeDefined();
@@ -227,6 +252,31 @@ describe("frontmatter-markdown-loader", () => {
           mode: [Mode.VUE_COMPONENT],
           ...additionalOptions
         }
+      });
+
+      describe("missing implicit dependencies", () => {
+        afterEach(() => {
+          jest.unmock("vue-template-compiler");
+          jest.unmock("@vue/component-compiler-utils");
+        });
+
+        it("throw if vue-template|compiler is not installed in the project", () => {
+          jest.mock('vue-template-compiler', () => {
+            throw new Error();
+          });
+          expect(() => {
+            load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
+          }).toThrow();
+        });
+
+        it("throw if @vue/component-compiler-utils is not installed in the project", () => {
+          jest.mock("@vue/component-compiler-utils", () => {
+            throw new Error();
+          });
+          expect(() => {
+            load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
+          }).toThrow();
+        });
       });
 
       it("doesn't return for neither 'vue.render' nor 'vue.staticRenderFns", () => {
@@ -307,6 +357,31 @@ HELLO
 `;
 
   describe("react mode", () => {
+    describe("missing implicit dependencies", () => {
+      afterEach(() => {
+        jest.unmock("@babel/core");
+        jest.unmock("@babel/preset-react");
+      });
+
+      it("throw if @babel/core is not installed in the project", () => {
+        jest.mock("@babel/core", () => {
+          throw new Error();
+        });
+        expect(() => {
+          load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.REACT] } });
+        }).toThrow();
+      });
+
+      it("throw if @babel/preset-react is not installed in the project", () => {
+        jest.mock("@babel/preset-react", () => {
+          throw new Error();
+        });
+        expect(() => {
+          load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.REACT] } });
+        }).toThrow();
+      });
+    });
+
     it("returns renderable React component", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.REACT] } });
       const MarkdownComponent = loaded.react;

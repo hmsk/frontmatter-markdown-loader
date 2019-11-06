@@ -5,18 +5,6 @@ const markdownIt = require('markdown-it');
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
-let compileVueTemplate, vueCompiler, babelCore
-try {
-  vueCompiler = require('vue-template-compiler')
-  compileVueTemplate = require('@vue/component-compiler-utils').compileTemplate
-} catch (err) {
-}
-
-try {
-  babelCore = require('@babel/core')
-} catch (err) {
-}
-
 function getNormalizedMarkdownCompiler(options) {
   if (options.markdown && options.markdownIt) {
     throw new Error(
@@ -76,7 +64,19 @@ module.exports = function (source) {
     addProperty('meta', stringify(meta));
   }
 
-  if ((enabled(Mode.VUE_COMPONENT) || enabled(Mode.VUE_RENDER_FUNCTIONS)) && vueCompiler && compileVueTemplate) {
+  if ((enabled(Mode.VUE_COMPONENT) || enabled(Mode.VUE_RENDER_FUNCTIONS))) {
+    let vueCompiler, compileVueTemplate;
+    try {
+      vueCompiler = require('vue-template-compiler')
+      compileVueTemplate = require('@vue/component-compiler-utils').compileTemplate
+    } catch (err) {
+      throw new Error(
+        "Failed to import vue-template-compiler or/and @vue/component-compiler-utils: \n" +
+        "If you intend to use 'vue-component', `vue-render-functions` mode, install both to your project: \n" +
+        "https://hmsk.github.io/frontmatter-markdown-loader/vue.html"
+      );
+    }
+
     const rootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
     const template = fm
       .html
@@ -129,6 +129,19 @@ module.exports = function (source) {
   }
 
   if (enabled(Mode.REACT)) {
+    let babelCore;
+
+    try {
+      babelCore = require('@babel/core');
+      require('@babel/preset-react');
+    } catch (err) {
+      throw new Error(
+        "Failed to import @babel/core or/and @babel/preset-react: \n" +
+        "If you intend to use 'react' mode, install both to your project: \n" +
+        "https://hmsk.github.io/frontmatter-markdown-loader/react.html"
+      );
+    }
+
     addPrepend(`const React = require('react')`);
 
     const compiled = babelCore
