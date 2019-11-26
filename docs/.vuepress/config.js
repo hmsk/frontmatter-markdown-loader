@@ -21,7 +21,8 @@ module.exports = {
         title: 'Samples',
         collapsable: false,
         children: [
-          ['/samples-vue', 'Vue App']
+          ['/samples-vue', 'Vue App'],
+          ['/samples-nuxt', 'Nuxt App']
         ]
       },
       {

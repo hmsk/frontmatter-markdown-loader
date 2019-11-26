@@ -25,37 +25,3 @@ module.exports = {
   }
 }
 ```
-
-# Nuxt app
-
-::: warning TBD
-Will be filled with nice samples later
-:::
-
-```ts
-import FMMode from "frontmatter-markdown-loader/mode";
-
-  ...
-  build: {
-    extend (config: any): void {
-      config.module.rules.push(
-        {
-          test: /\.md$/,
-          loader: "frontmatter-markdown-loader",
-          include: episodeDir,
-          options: {
-            mode: [FMMode.VUE_COMPONENT],
-            vue: {
-              root: "episodeMarkdown"
-            },
-            markdown: (body: string) => {
-              return md.render(body);
-            }
-          }
-        }
-      )
-    },
-    ...
-  }
-  ...
-```
