@@ -234,7 +234,10 @@ describe("frontmatter-markdown-loader", () => {
       it("returns functions to run as Vue component which has the correct template", () => {
         load(markdownWithFrontmatter, contextEnablingVueRenderFunctions({ vue: { root: "forJest" } }));
         const wrapper = mountComponent(buildVueComponent());
-        expect(wrapper.html()).toBe('<div class=\"forJest\"><h1>Title</h1> <p>GOOD <code>BYE</code> FRIEND\nCHEERS</p></div>');
+        const rootElement = wrapper.find(".forJest");
+        expect(rootElement.find("h1").text()).toBe("Title");
+        expect(rootElement.find("p").find("code").text()).toBe("BYE");
+        expect(rootElement.find("p").text()).toBe("GOOD BYE FRIEND\nCHEERS");
       });
 
       it("returns functions to run as Vue component which includes child component", () => {
