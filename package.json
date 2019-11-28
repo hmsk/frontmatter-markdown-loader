@@ -37,7 +37,7 @@
     "@babel/core": "7.7.4",
     "@babel/preset-env": "7.7.4",
     "@babel/preset-react": "7.7.4",
-    "@vue/babel-preset-app": "4.0.5",
+    "@vue/babel-preset-app": "4.1.1",
     "@vue/component-compiler-utils": "3.0.2",
     "@vue/test-utils": "1.0.0-beta.29",
     "jest": "24.9.0",
