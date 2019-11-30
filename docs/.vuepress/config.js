@@ -21,6 +21,7 @@ module.exports = {
         title: 'Samples',
         collapsable: false,
         children: [
+          ['/samples-react', 'React App'],
           ['/samples-vue', 'Vue App']
         ]
       },
@@ -28,7 +29,7 @@ module.exports = {
         title: 'Migration',
         collapsable: false,
         children: [
-          ['/migration', 'If you have update major version'],
+          ['/migration', 'When you update major version'],
         ]
       }
     ]

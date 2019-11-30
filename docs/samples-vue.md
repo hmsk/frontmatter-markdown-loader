@@ -1,8 +1,41 @@
-# vue-cli app
+# Vue app
+
+[[toc]]
+
+## Nuxt.js app
+
+- [Sample Project: hmsk/frontmatter-markdown-loader-nuxt-sample](https://github.com/hmsk/frontmatter-markdown-loader-nuxt-sample)
+
+### Register the loader through `nuxt.config.js`
+
+```ts
+import FMMode from "frontmatter-markdown-loader/mode";
+
+  ...
+  build: {
+    extend (config: any): void {
+      config.module.rules.push(
+        {
+          test: /\.md$/,
+          loader: "frontmatter-markdown-loader",
+          options: {
+            mode: [FMMode.VUE_COMPONENT]
+          }
+        }
+      )
+    },
+    ...
+  }
+  ...
+```
+
+Otherwise, just refer [Vue Component/Renderers Guide](/vue).
+
+## vue-cli app
 
 - [Sample Project: hmsk/frontmatter-markdown-loader-vue-sample](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample)
 
-## Register the loader through `vue.config.js`
+### Register the loader through `vue.config.js`
 
 ```js
 const Mode = require('frontmatter-markdown-loader/mode')
@@ -16,46 +49,12 @@ module.exports = {
         .loader('frontmatter-markdown-loader')
         .tap(options => {
           return {
-            mode: [Mode.VUE_COMPONENT],
-            vue: {
-              root: 'markdown-body'
-            }
+            mode: [Mode.VUE_COMPONENT]
           }
         })
   }
 }
 ```
 
-# Nuxt app
+Otherwise, just refer [Vue Component/Renderers Guide](/vue).
 
-::: warning TBD
-Will be filled with nice samples later
-:::
-
-```ts
-import FMMode from "frontmatter-markdown-loader/mode";
-
-  ...
-  build: {
-    extend (config: any): void {
-      config.module.rules.push(
-        {
-          test: /\.md$/,
-          loader: "frontmatter-markdown-loader",
-          include: episodeDir,
-          options: {
-            mode: [FMMode.VUE_COMPONENT],
-            vue: {
-              root: "episodeMarkdown"
-            },
-            markdown: (body: string) => {
-              return md.render(body);
-            }
-          }
-        }
-      )
-    },
-    ...
-  }
-  ...
-```
