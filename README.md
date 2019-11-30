@@ -36,9 +36,17 @@ fm.vue.component // Extendable component object for Vue which renders compiled m
 
 📚 See the [documentation](https://hmsk.github.io/frontmatter-markdown-loader/) for the further detail.
 
-## 🔰 You have trouble with missing object?
+<details>
+<summary>🔰 You have trouble with missing object?</summary>
 
 The loader got the breaking changes in the latest major update. The article which you referred might premise on the old version. Check the installed version, if that says `1.x.y`, see [this guide](https://hmsk.github.io/frontmatter-markdown-loader/migration).
+</details>
+
+## Samples
+
+- [vue-cli app](https://github.com/hmsk/frontmatter-markdown-loader-vue-sample)
+- [Nuxt.js](https://github.com/hmsk/frontmatter-markdown-loader-nuxt-sample)
+- [NextJS (w/ Netlify CMS)](https://www.netlifycms.org/docs/nextjs/)
 
 ## Inspired/Referred
 
