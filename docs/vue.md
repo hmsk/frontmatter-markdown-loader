@@ -60,8 +60,7 @@ Imported component is ready-made Vue component. We don't need to have Vue compil
 
 ### B. Import dynamically
 
-In Webpack based Vue app (Like vue-cli, Nuxt,js) [enables us to import files asynchrounously](https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components). That allows us to give file name dynamically.
-This may help you to build CMS, Blog...etc 😉
+Import a component based on dynamic variables, This may help you to build CMS, Blog...etc 😉
 
 ```vue
 <template>
@@ -82,10 +81,13 @@ This may help you to build CMS, Blog...etc 😉
       }
     },
     created () {
-      this.dynamicComponent = () => import(`../contents/${this.fileName}.md`).then((md) => {
-        this.title = md.title
-        return md.vue.component
-      })
+      const markdown = require(`~/articles/${this.fileName}.md`)
+      this.title = markdown.attributes.title
+      this.dynamicComponent = markdown.vue.component
+
+      // Use Async Components for the benefit of code splitting
+      // https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components
+      // this.dynamicComponent = () => import(`~/articles/${this.fileName}.md`).then(({ vue }) => vue.component
     }
   }
 </script>
