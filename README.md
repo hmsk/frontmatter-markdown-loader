@@ -1,7 +1,7 @@
 # frontmatter-markdown-loader [![frontmatter-markdown-loader Dev Token](https://badge.devtoken.rocks/frontmatter-markdown-loader)](https://devtoken.rocks/package/frontmatter-markdown-loader)
 
 [![npm](https://img.shields.io/npm/v/frontmatter-markdown-loader.svg?style=for-the-badge)](https://www.npmjs.com/package/frontmatter-markdown-loader)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/hmsk/frontmatter-markdown-loader/Node CI?style=for-the-badge)](https://github.com/hmsk/frontmatter-markdown-loader/actions?query=workflow%3A%22Node+CI%22)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/hmsk/frontmatter-markdown-loader/Node%20CI?style=for-the-badge)](https://github.com/hmsk/frontmatter-markdown-loader/actions?query=workflow%3A%22Node+CI%22)
 
 Webpack Loader for [Front Matter](https://jekyllrb.com/docs/front-matter/) files (.md) which returns:
 
