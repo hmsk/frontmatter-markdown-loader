@@ -262,6 +262,7 @@ Default is `true` which means:
 
 ```js
 {
+  audio: 'src',
   video: ['src', 'poster'],
   source: 'src',
   img: 'src',
@@ -269,6 +270,10 @@ Default is `true` which means:
   use: ['xlink:href', 'href']
 }
 ```
+
+::: warning Depends on the version of @vue/component-compiler-utils
+`audio: 'src'` is added after `@vue/component-compiler-utils@v3.1.0`
+:::
 
 This option will be merged with the default.
 
@@ -290,6 +295,7 @@ So, the configuration becomes eventually:
 
 ```diff
 {
+  audio: 'src',
   video: ['src', 'poster'],
   source: 'src',
 - img: 'src',
