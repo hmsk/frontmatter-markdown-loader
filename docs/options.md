@@ -36,7 +36,7 @@ That's equivalent to:
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     mode: [Mode.HTML]
   }
@@ -57,7 +57,7 @@ fm.html //=> "<h1>Title</h1>\n<p>message</p>\n"
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     mode: [Mode.BODY]
   }
@@ -79,7 +79,7 @@ fm.body //=> "# Title\n\nmessage\n"
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     mode: [Mode.META]
   }
@@ -101,7 +101,7 @@ Currently, only `resourcePath` is available which returns [the path for the file
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     mode: [Mode.REACT]
   }
@@ -115,7 +115,7 @@ Currently, only `resourcePath` is available which returns [the path for the file
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     mode: [Mode.VUE_COMPONENT]
   }
@@ -139,7 +139,7 @@ To see the usage of `fm.vue.component`, see [this page](vue).
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     mode: [Mode.VUE_RENDER_FUNCTIONS]
   }
@@ -176,7 +176,7 @@ By default, the loader compiles markdown with [markdown-it](https://github.com/m
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     markdownIt: {
       html: true,
@@ -198,7 +198,7 @@ const markdownIt = require('markdown-it');
 const markdownItPrism = require('markdown-it-prism');
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     markdownIt: markdownIt({ html: true }).use(markdownItPrism)
   }
@@ -212,7 +212,7 @@ To provide the custom compilation logic, `markdown` option accepts the callback 
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     markdown: (body) => {
       return compileWithCustomCompiler(body)
@@ -230,7 +230,7 @@ To provide the custom compilation logic, `markdown` option accepts the callback 
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     vue: {
       root: 'dynamicContent'
@@ -280,7 +280,7 @@ This option will be merged with the default.
 ```js
 {
   test: /\.md$/,
-  loader: 'frontmatter-markdown-loader'
+  loader: 'frontmatter-markdown-loader',
   options: {
     vue: {
       transformAssetUrls: {
