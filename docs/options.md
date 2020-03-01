@@ -108,6 +108,10 @@ Currently, only `resourcePath` is available which returns [the path for the file
 }
 ```
 
+::: tip How to use in React
+To see the usage of `fm.react`, see [this page](react).
+:::
+
 ### Vue component
 
 `Mode.VUE_COMPONENT` requests to get the extendable component object of Vue.
