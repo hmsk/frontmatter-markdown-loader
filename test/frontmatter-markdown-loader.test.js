@@ -357,6 +357,8 @@ HELLO
 <ChildComponent />
 
 <AnotherChild>I am another</AnotherChild>
+
+![Awewsome Photo](/assets/awesome-photo.jpg)
 `;
 
   describe("react mode", () => {
