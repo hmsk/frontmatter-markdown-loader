@@ -108,6 +108,10 @@ Currently, only `resourcePath` is available which returns [the path for the file
 }
 ```
 
+::: tip How to use in React
+To see the usage of `fm.react`, see [this page](react).
+:::
+
 ### Vue component
 
 `Mode.VUE_COMPONENT` requests to get the extendable component object of Vue.
@@ -189,7 +193,7 @@ By default, the loader compiles markdown with [markdown-it](https://github.com/m
 
 [Refer markdown-it document for the further about the configuration](https://github.com/markdown-it/markdown-it#init-with-presets-and-options).
 
-If `markdownIt` option isn't given, the loader uses `markdown-it` with just `{ html: true}` as default.
+If `markdownIt` option isn't given, the loader uses `markdown-it` with just `{ html: true}` as default. (If enabled `Mode.REACT`, `{ html: true, xhtmlOut: true }`)
 
 `markdonIt` option also accepts the instance of a markdown-it rederer (with [plugins](https://www.npmjs.com/search?q=keywords:markdown-it-plugin), for instance):
 

@@ -31,5 +31,11 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
       I am another
     </i>
   </p>
+  <p>
+    <img
+      alt="Awewsome Photo"
+      src="/assets/awesome-photo.jpg"
+    />
+  </p>
 </div>
 `;
