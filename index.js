@@ -5,7 +5,7 @@ const markdownIt = require('markdown-it');
 
 const stringify = (src) => JSON.stringify(src).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
-function getNormalizedMarkdownCompiler(options) {
+function getNormalizedMarkdownCompiler (options, isReactEnabled) {
   if (options.markdown && options.markdownIt) {
     throw new Error(
       "Both markdown and markdownIt options were specified. This is not supported. \n" +
@@ -30,7 +30,7 @@ function getNormalizedMarkdownCompiler(options) {
   }
 
   // If no configuration is passed - use a sensible default
-  return markdownIt({ html: true });
+  return markdownIt(isReactEnabled ? { html: true, xhtmlOut: true } : { html: true });
 }
 
 module.exports = function (source) {
@@ -51,7 +51,7 @@ module.exports = function (source) {
   };
 
   const fm = frontmatter(source);
-  const markdownCompiler = getNormalizedMarkdownCompiler(options);
+  const markdownCompiler = getNormalizedMarkdownCompiler(options, enabled(Mode.REACT));
   fm.html = markdownCompiler.render(fm.body);
 
   addProperty('attributes', stringify(fm.attributes));
