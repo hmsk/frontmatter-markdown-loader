@@ -95,7 +95,7 @@ module.exports = function (source) {
     };
 
     const compiled = compileVueTemplate(compileOptions);
-    addPrepend(`const extractVueFunctions = () => {\n${compiled.code}\nreturn { render, staticRenderFns }\n}\nconst vueFunctions = extractVueFunctions()`);
+    addPrepend(`function extractVueFunctions () {\n${compiled.code}\nreturn { render, staticRenderFns }\n}\nconst vueFunctions = extractVueFunctions()`);
 
     let vueOutput = '';
 
@@ -156,13 +156,11 @@ module.exports = function (source) {
 
     const reactComponent = `
       function (props) {
-        Object.entries(props).forEach(function (prop) {
-          const key = prop[0]
-          const value = prop[1]
-          this[key] = value;
-        });
+        Object.keys(props).forEach(function (key) {
+          this[key] = props[key]
+        })
         ${compiled.code}
-        return markdown;
+        return markdown
       }
     `
     addProperty('react', reactComponent);
