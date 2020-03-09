@@ -156,7 +156,9 @@ module.exports = function (source) {
 
     const reactComponent = `
       function (props) {
-        Object.entries(props).forEach(([key, value]) => {
+        Object.entries(props).forEach(function (prop) {
+          const key = prop[0]
+          const value = prop[1]
           this[key] = value;
         });
         ${compiled.code}
