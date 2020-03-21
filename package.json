@@ -1,6 +1,6 @@
 {
   "name": "frontmatter-markdown-loader",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Webpack loader for Front Matter Markdown file to get front matter attributes, compiled markdown and React/Vue component which renders compiled markdown",
   "main": "index.js",
   "scripts": {
