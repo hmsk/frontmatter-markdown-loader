@@ -36,7 +36,7 @@ function getNormalizedMarkdownCompiler (options, isReactEnabled) {
 module.exports = function (source) {
   if (this.cacheable) this.cacheable();
 
-  const options = loaderUtils.getOptions(this) || {}
+  const options = loaderUtils.getOptions(this);
   const requestedMode = Array.isArray(options.mode) ? options.mode : [Mode.HTML];
   const enabled = (mode) => requestedMode.includes(mode);
 
