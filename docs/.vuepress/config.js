@@ -14,7 +14,7 @@ module.exports = {
           ['/', 'Setup'],
           ['/options', 'Options'],
           ['/react', 'React Component'],
-          ['/vue', 'Vue Compoent/Renderers']
+          ['/vue', 'Vue Component/Renderers']
         ]
       },
       {
