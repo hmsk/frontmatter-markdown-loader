@@ -394,6 +394,13 @@ HELLO
       expect(rendered.toJSON()).toMatchSnapshot();
     });
 
+    it("returns renderable React component with expected root class", () => {
+      load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.REACT], react: { root: 'forReact' } } });
+      const MarkdownComponent = loaded.react;
+      const rendered = reactRenderer.create(<MarkdownComponent />);
+      expect(rendered.toJSON()).toMatchSnapshot();
+    });
+
     it("returns renderable React component with accepting child components through props", () => {
       load(markdownWithFrontmatterIncludingPascalChildComponent, { ...defaultContext, query: { mode: [Mode.REACT] } });
       const MarkdownComponent = loaded.react;

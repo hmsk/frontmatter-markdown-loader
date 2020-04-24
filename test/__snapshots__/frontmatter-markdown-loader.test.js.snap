@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`frontmatter-markdown-loader react mode returns renderable React component 1`] = `
-<div>
+<div
+  class="frontmatter-markdown"
+>
   <h1>
     Title
   </h1>
@@ -16,7 +18,9 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
 `;
 
 exports[`frontmatter-markdown-loader react mode returns renderable React component with accepting child components through props 1`] = `
-<div>
+<div
+  class="frontmatter-markdown"
+>
   <h1>
     Title
   </h1>
@@ -36,6 +40,23 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
       alt="Awewsome Photo"
       src="/assets/awesome-photo.jpg"
     />
+  </p>
+</div>
+`;
+
+exports[`frontmatter-markdown-loader react mode returns renderable React component with expected root class 1`] = `
+<div
+  class="forReact"
+>
+  <h1>
+    Title
+  </h1>
+  <p>
+    GOOD 
+    <code>
+      BYE
+    </code>
+     FRIEND CHEERS
   </p>
 </div>
 `;

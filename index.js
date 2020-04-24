@@ -77,14 +77,14 @@ module.exports = function (source) {
       );
     }
 
-    const rootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
+    const vueRootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
     const template = fm
       .html
       .replace(/<(code\s.+)>/g, "<$1 v-pre>")
       .replace(/<code>/g, "<code v-pre>");
 
     const compileOptions = {
-      source: `<div class="${rootClass}">${template}</div>`,
+      source: `<div class="${vueRootClass}">${template}</div>`,
       filename: this.resourcePath,
       compiler: vueCompiler,
       compilerOptions: {
@@ -130,6 +130,7 @@ module.exports = function (source) {
 
   if (enabled(Mode.REACT)) {
     let babelCore;
+    const reactRootClass = options.react && options.react.root ? options.react.root : 'frontmatter-markdown';
 
     try {
       babelCore = require('@babel/core');
@@ -147,7 +148,7 @@ module.exports = function (source) {
     const compiled = babelCore
       .transformSync(`
         const markdown =
-          <div>
+          <div class="${reactRootClass}">
             ${fm.html}
           </div>
         `, {
