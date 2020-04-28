@@ -95,7 +95,7 @@ module.exports = function (source) {
     };
 
     const compiled = compileVueTemplate(compileOptions);
-    addPrepend(`function extractVueFunctions () {\n${compiled.code}\nreturn { render, staticRenderFns }\n}\nconst vueFunctions = extractVueFunctions()`);
+    addPrepend(`function extractVueFunctions () {\n${compiled.code}\nreturn { render:render, staticRenderFns:staticRenderFns }\n}\nconst vueFunctions = extractVueFunctions()`);
 
     let vueOutput = '';
 
