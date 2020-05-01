@@ -312,3 +312,32 @@ So, the configuration becomes eventually:
 ```
 
 To disable all completely, just give `false`.
+
+## React Compilation
+
+### Class name for root `div` element
+
+`react.root` option configures the class name of the root `div` element on React component's HTML.
+
+```js
+{
+  test: /\.md$/,
+  loader: 'frontmatter-markdown-loader',
+  options: {
+    react: {
+      root: 'dynamicContent'
+    }
+  }
+}
+```
+
+By this configuration, the HTML in the below will be rendered by the React component.
+
+```js
+<div class="dynamicContent">
+  <h1>Title</h1>
+  <p>Main sentences</p>
+</div>
+```
+
+Default is `frontmatter-markdown`.
