@@ -199,7 +199,7 @@ If `markdownIt` option isn't given, the loader uses `markdown-it` with just `{ h
 
 ```js
 const markdownIt = require('markdown-it');
-const markdownItPrism = require('markdown-it-prism');
+const markdownItPrism = require('markdown-it-prism'); // https://github.com/jGleitz/markdown-it-prism
 {
   test: /\.md$/,
   loader: 'frontmatter-markdown-loader',
@@ -208,6 +208,8 @@ const markdownItPrism = require('markdown-it-prism');
   }
 }
 ```
+
+Btw, you need to [load a stylesheet of Prism on your project](https://prismjs.com/#basic-usage) for this case 😉
 
 ### Custom compiler
 
