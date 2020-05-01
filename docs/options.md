@@ -238,6 +238,7 @@ To provide the custom compilation logic, `markdown` option accepts the callback 
   test: /\.md$/,
   loader: 'frontmatter-markdown-loader',
   options: {
+    mode: [Mode.VUE_COMPONENT],
     vue: {
       root: 'dynamicContent'
     }
@@ -288,6 +289,7 @@ This option will be merged with the default.
   test: /\.md$/,
   loader: 'frontmatter-markdown-loader',
   options: {
+    mode: [Mode.VUE_COMPONENT],
     vue: {
       transformAssetUrls: {
         img: ['src', 'data-src']
@@ -324,6 +326,7 @@ To disable all completely, just give `false`.
   test: /\.md$/,
   loader: 'frontmatter-markdown-loader',
   options: {
+    mode: [Mode.REACT],
     react: {
       root: 'dynamicContent'
     }
