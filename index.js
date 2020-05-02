@@ -148,7 +148,7 @@ module.exports = function (source) {
     const compiled = babelCore
       .transformSync(`
         const markdown =
-          <div class="${reactRootClass}">
+          <div className="${reactRootClass}">
             ${fm.html}
           </div>
         `, {
