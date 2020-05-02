@@ -2,7 +2,7 @@
 
 exports[`frontmatter-markdown-loader react mode returns renderable React component 1`] = `
 <div
-  class="frontmatter-markdown"
+  className="frontmatter-markdown"
 >
   <h1>
     Title
@@ -19,7 +19,7 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
 
 exports[`frontmatter-markdown-loader react mode returns renderable React component with accepting child components through props 1`] = `
 <div
-  class="frontmatter-markdown"
+  className="frontmatter-markdown"
 >
   <h1>
     Title
@@ -46,7 +46,7 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
 
 exports[`frontmatter-markdown-loader react mode returns renderable React component with expected root class 1`] = `
 <div
-  class="forReact"
+  className="forReact"
 >
   <h1>
     Title
