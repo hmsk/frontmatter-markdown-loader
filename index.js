@@ -80,7 +80,7 @@ module.exports = function (source) {
     const vueRootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
     const template = fm
       .html
-      .replace(/<(code\s.+)>/g, "<$1 v-pre>")
+      .replace(/<(code\s[^>]+)>/g, "<$1 v-pre>")
       .replace(/<code>/g, "<code v-pre>");
 
     const compileOptions = {
