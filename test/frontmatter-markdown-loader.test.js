@@ -213,7 +213,7 @@ describe("frontmatter-markdown-loader", () => {
       it("returns functions to run as Vue component which includes child component", () => {
         load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueRenderFunctions());
         const wrapper = mountComponent(buildVueComponent());
-        expect(wrapper.find(ChildComponent).exists()).toBe(true);
+        expect(wrapper.findComponent(ChildComponent).exists()).toBe(true);
         expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
       });
     });
@@ -265,7 +265,7 @@ describe("frontmatter-markdown-loader", () => {
           components: { ChildComponent, CodeConfusing }
         };
         const wrapper = mountComponent(component);
-        expect(wrapper.find(ChildComponent).exists()).toBe(true);
+        expect(wrapper.findComponent(ChildComponent).exists()).toBe(true);
         expect(wrapper.find(".childComponent").text()).toBe("Child Vue Component olloeh");
       });
 
@@ -311,7 +311,7 @@ describe("frontmatter-markdown-loader", () => {
         expect(snipets.at(0).text()).toContain("<child-component>{{ test->() }}</child-component>");
         expect(snipets.at(1).text()).toContain("<sample-component>{{ app->() }}</sample-component>");
         expect(snipets.at(2).text()).toBe("{{ I shouldn't be evaluated }}");
-        expect(wrapper.contains(CodeConfusing)).toBe(true);
+        expect(wrapper.findComponent(CodeConfusing).exists()).toBe(true);
       });
     });
   });
