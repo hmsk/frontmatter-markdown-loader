@@ -1,6 +1,7 @@
 import { mount, createLocalVue } from "@vue/test-utils";
 import reactRenderer from 'react-test-renderer';
 import React from 'react';
+import fs from "fs";
 
 import markdownIt from "markdown-it";
 import nodeEval from "node-eval";
@@ -34,29 +35,7 @@ GOOD \`BYE\` FRIEND
 CHEERS
 `;
 
-const markdownWithFrontmatterIncludingChildComponent = `---
-subject: Hello
-tags:
-  - tag1
-  - tag2
----
-# Title
-
-HELLO
-<child-component />
-
-<code-confusing />
-
-![Avatar Image](./avatar.png.js)
-
-\`\`\`html
-<child-component>{{ test->() }}</child-component>
-\`\`\`
-
-\`\`\`
-<sample-component>{{ app->() }}</sample-component>
-\`\`\`
-`;
+const markdownWithFrontmatterIncludingChildComponent = fs.readFileSync("test/with-frontmatter-including-custom-element.md", "utf8");
 
 describe("frontmatter-markdown-loader", () => {
   afterEach(() => {
@@ -337,9 +316,10 @@ describe("frontmatter-markdown-loader", () => {
         };
         const wrapper = mountComponent(component);
         const snipets = wrapper.findAll("code");
-        expect(snipets).toHaveLength(2);
+        expect(snipets).toHaveLength(3);
         expect(snipets.at(0).text()).toContain("<child-component>{{ test->() }}</child-component>");
         expect(snipets.at(1).text()).toContain("<sample-component>{{ app->() }}</sample-component>");
+        expect(snipets.at(2).text()).toBe("{{ I shouldn't be evaluated }}");
         expect(wrapper.contains(CodeConfusing)).toBe(true);
       });
     });
