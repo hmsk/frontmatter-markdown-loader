@@ -2,6 +2,7 @@ import { mount, createLocalVue } from "@vue/test-utils";
 import reactRenderer from 'react-test-renderer';
 import React from 'react';
 import fs from "fs";
+import path from "path";
 
 import markdownIt from "markdown-it";
 import nodeEval from "node-eval";
@@ -23,19 +24,9 @@ const load = (source, context = defaultContext) => {
   loaded = nodeEval(rawLoaded, "sample.md");
 }
 
-const markdownWithFrontmatter = `---
-subject: Hello
-tags:
-  - tag1
-  - tag2
----
-# Title
-
-GOOD \`BYE\` FRIEND
-CHEERS
-`;
-
-const markdownWithFrontmatterIncludingChildComponent = fs.readFileSync("test/with-frontmatter-including-custom-element.md", "utf8");
+const markdownWithFrontmatter = fs.readFileSync(path.join(__dirname, "with-frontmatter.md"), "utf8");
+const markdownWithFrontmatterIncludingChildComponent = fs.readFileSync(path.join(__dirname, "with-frontmatter-including-custom-element.md"), "utf8");
+const markdownWithFrontmatterIncludingPascalChildComponent = fs.readFileSync(path.join(__dirname, "with-frontmatter-including-custom-element-by-pascal.md"), "utf8");;
 
 describe("frontmatter-markdown-loader", () => {
   afterEach(() => {
@@ -325,21 +316,6 @@ describe("frontmatter-markdown-loader", () => {
     });
   });
 
-  const markdownWithFrontmatterIncludingPascalChildComponent = `---
-subject: Hello
-tags:
-  - tag1
-  - tag2
----
-# Title
-
-HELLO
-<ChildComponent />
-
-<AnotherChild>I am another</AnotherChild>
-
-![Awewsome Photo](/assets/awesome-photo.jpg)
-`;
 
   describe("react mode", () => {
     describe("missing implicit dependencies", () => {
