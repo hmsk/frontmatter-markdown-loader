@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/hmsk/frontmatter-markdown-loader#readme",
   "dependencies": {
-    "front-matter": "^3.0.1",
+    "front-matter": "^4.0.0",
     "loader-utils": "^2.0.0",
     "markdown-it": "^11.0.0"
   },
