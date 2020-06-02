@@ -8,3 +8,8 @@ tags:
 
 GOOD `BYE` FRIEND
 CHEERS
+
+```js
+const multipleLine = true;
+console.warn(multipleLine)
+```

@@ -14,6 +14,13 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
     </code>
      FRIEND CHEERS
   </p>
+  <pre>
+    <code
+      class="language-js"
+    >
+      const multipleLine = true; console.warn(multipleLine)
+    </code>
+  </pre>
 </div>
 `;
 
@@ -58,5 +65,12 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
     </code>
      FRIEND CHEERS
   </p>
+  <pre>
+    <code
+      class="language-js"
+    >
+      const multipleLine = true; console.warn(multipleLine)
+    </code>
+  </pre>
 </div>
 `;

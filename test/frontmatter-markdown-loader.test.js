@@ -39,7 +39,9 @@ describe("frontmatter-markdown-loader", () => {
     });
 
     it("returns compiled HTML for 'html' property", () => {
-      expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n");
+      expect(loaded.html).toBe(
+        "<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n<pre><code class=\"language-js\">const multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
+      );
     });
 
     it("returns frontmatter object for 'attributes' property", () => {
@@ -82,7 +84,9 @@ describe("frontmatter-markdown-loader", () => {
   describe("markdownId option", () => {
     it("returns HTML with configured markdownIt: breaks option is enabled as configuration", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { markdownIt: { breaks: true } } });
-      expect(loaded.html).toBe("<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND<br>\nCHEERS</p>\n");
+      expect(loaded.html).toBe(
+        "<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND<br>\nCHEERS</p>\n<pre><code class=\"language-js\">const multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
+      )
     });
 
     it("returns HTML with configured markdownIt instance: breaks option is enabled by .enable", () => {
@@ -96,14 +100,18 @@ describe("frontmatter-markdown-loader", () => {
       };
 
       load(markdownWithFrontmatter, { ...defaultContext, query: { markdownIt: markdownItInstance } });
-      expect(loaded.html).toBe("<h1>Title</h1>\n<p data-paragraph=\"hello\">GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n");
+      expect(loaded.html).toBe(
+        "<h1>Title</h1>\n<p data-paragraph=\"hello\">GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n<pre><code class=\"language-js\">const multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
+      );
     });
   });
 
   describe("body mode is enabled", () => {
     it("returns raw markdown body for 'body' property", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.BODY] } });
-      expect(loaded.body).toBe("# Title\n\nGOOD `BYE` FRIEND\nCHEERS\n");
+      expect(loaded.body).toBe(
+        "# Title\n\nGOOD `BYE` FRIEND\nCHEERS\n\n```js\nconst multipleLine = true;\nconsole.warn(multipleLine)\n```\n"
+      );
     });
   });
 
