@@ -9,17 +9,26 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
   </h1>
   <p>
     GOOD 
-    <code>
-      BYE
-    </code>
+    <code
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "BYE",
+        }
+      }
+    />
      FRIEND CHEERS
   </p>
   <pre>
     <code
       class="language-js"
-    >
-      const multipleLine = true; console.warn(multipleLine)
-    </code>
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "const multipleLine = true;
+console.warn(multipleLine)
+",
+        }
+      }
+    />
   </pre>
 </div>
 `;
@@ -60,17 +69,26 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
   </h1>
   <p>
     GOOD 
-    <code>
-      BYE
-    </code>
+    <code
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "BYE",
+        }
+      }
+    />
      FRIEND CHEERS
   </p>
   <pre>
     <code
       class="language-js"
-    >
-      const multipleLine = true; console.warn(multipleLine)
-    </code>
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "const multipleLine = true;
+console.warn(multipleLine)
+",
+        }
+      }
+    />
   </pre>
 </div>
 `;

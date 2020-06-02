@@ -145,11 +145,16 @@ module.exports = function (source) {
 
     addPrepend(`const React = require('react')`);
 
+    const template = fm
+      .html
+      .replace(/<code(\s[^>]+)>(.+)<\/code>/sg, "<code$1 dangerouslySetInnerHTML={{ __html: `$2` }} />")
+      .replace(/<code>(.+)<\/code>/g, "<code dangerouslySetInnerHTML={{ __html: `$1` }} />");
+
     const compiled = babelCore
       .transformSync(`
         const markdown =
           <div className="${reactRootClass}">
-            ${fm.html}
+            ${template}
           </div>
         `, {
         presets: ['@babel/preset-react']
