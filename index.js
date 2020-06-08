@@ -147,8 +147,8 @@ module.exports = function (source) {
 
     const template = fm
       .html
-      .replace(/<code(\s[^>]+)>(.+)<\/code>/sg, "<code$1 dangerouslySetInnerHTML={{ __html: `$2` }} />")
-      .replace(/<code>(.+)<\/code>/g, "<code dangerouslySetInnerHTML={{ __html: `$1` }} />");
+      .replace(/<code(\s[^>]+)>(.+?)<\/code>/sg, "<code$1>{`$2`}</code>")
+      .replace(/<code>(.+?)<\/code>/g, "<code>{`$1`}</code>");
 
     const compiled = babelCore
       .transformSync(`
