@@ -20,7 +20,7 @@ function getNormalizedMarkdownCompiler (options, isReactEnabled) {
   }
 
   // If you've passed in a MarkdownIt instance, just use that
-  if (options.markdownIt instanceof markdownIt) {
+  if (options.markdownIt instanceof markdownIt || (options.markdownIt && options.markdownIt.constructor && options.markdownIt.constructor.name === 'MarkdownIt')) {
     return options.markdownIt;
   }
 
