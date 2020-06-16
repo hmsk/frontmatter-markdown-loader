@@ -23,7 +23,7 @@ module.exports = {
 }
 ```
 
-Otherwise, just refer [React Component Guide](/react).
+Otherwise, just refer [React Component Guide](./react).
 
 ## Rewired create-react-app
 
@@ -55,4 +55,4 @@ module.exports = function override(config, env) {
 }
 ```
 
-Otherwise, just refer [React Component Guide](/react).
+Otherwise, just refer [React Component Guide](./react).

@@ -23,7 +23,7 @@ fm.attributes //=> { subject: "Hello", tags: ["tag1", "tag2"] }
 fm.html //=> "<h1>Title</h1>\n<p>message</p>\n"
 ```
 
-And there are [some convenience features for Vue stack](vue) 😉
+And there are [some convenience features for Vue stack](./vue) 😉
 
 ## Setup
 

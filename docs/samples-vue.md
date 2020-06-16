@@ -29,7 +29,7 @@ import FMMode from "frontmatter-markdown-loader/mode";
   ...
 ```
 
-Otherwise, just refer [Vue Component/Renderers Guide](/vue).
+Otherwise, just refer [Vue Component/Renderers Guide](./vue).
 
 ## vue-cli app
 
@@ -56,5 +56,5 @@ module.exports = {
 }
 ```
 
-Otherwise, just refer [Vue Component/Renderers Guide](/vue).
+Otherwise, just refer [Vue Component/Renderers Guide](./vue).
 

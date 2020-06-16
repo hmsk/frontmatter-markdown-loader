@@ -109,7 +109,7 @@ Currently, only `resourcePath` is available which returns [the path for the file
 ```
 
 ::: tip How to use in React
-To see the usage of `fm.react`, see [this page](react).
+To see the usage of `fm.react`, see [this page](./react).
 :::
 
 ### Vue component
@@ -133,7 +133,7 @@ fm.vue.component //=> The object which can be extendable as Vue component which 
 ```
 
 ::: tip How to use in Vue
-To see the usage of `fm.vue.component`, see [this page](vue).
+To see the usage of `fm.vue.component`, see [this page](./vue).
 :::
 
 ### Vue's render functions
@@ -158,7 +158,7 @@ fm.vue.staticRenderFns
 ```
 
 ::: tip How to use in Vue
-To see the usage of `fm.vue.component`, see [this page](vue).
+To see the usage of `fm.vue.component`, see [this page](./vue).
 :::
 
 ```js
@@ -168,7 +168,7 @@ fm.react //=> The function which is renderable as React component which has comp
 ```
 
 ::: tip How to use in React
-To see the usage of `fm.react`, see [this page](react).
+To see the usage of `fm.react`, see [this page](./react).
 :::
 
 ## Markdown compilation
