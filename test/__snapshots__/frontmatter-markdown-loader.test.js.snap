@@ -20,7 +20,7 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
   </p>
   <pre>
     <code
-      class="language-js"
+      className="language-js"
       dangerouslySetInnerHTML={
         Object {
           "__html": "const multipleLine = true;
@@ -80,7 +80,7 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
   </p>
   <pre>
     <code
-      class="language-js"
+      className="language-js"
       dangerouslySetInnerHTML={
         Object {
           "__html": "const multipleLine = true;
