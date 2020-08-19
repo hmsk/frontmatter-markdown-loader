@@ -4,6 +4,11 @@
 
 ## Nuxt.js app
 
+::: tip @nuxt/content is awesome
+You are trying to build your blogging system on Nuxt.js with frontmatter-markdown-loader?
+Highly recommend using [@nuxt/content](https://content.nuxtjs.org/) instead 😉
+:::
+
 - [Sample Project: hmsk/frontmatter-markdown-loader-nuxt-sample](https://github.com/hmsk/frontmatter-markdown-loader-nuxt-sample)
 
 ### Register the loader through `nuxt.config.js`
