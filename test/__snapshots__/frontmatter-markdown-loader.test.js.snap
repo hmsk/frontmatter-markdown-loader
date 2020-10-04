@@ -23,7 +23,8 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
       className="language-js"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "const multipleLine = true;
+          "__html": "const templateLiteral = \`ok\`;
+const multipleLine = true;
 console.warn(multipleLine)
 ",
         }
@@ -83,7 +84,8 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
       className="language-js"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "const multipleLine = true;
+          "__html": "const templateLiteral = \`ok\`;
+const multipleLine = true;
 console.warn(multipleLine)
 ",
         }

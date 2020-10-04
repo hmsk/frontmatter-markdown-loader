@@ -40,7 +40,7 @@ describe("frontmatter-markdown-loader", () => {
 
     it("returns compiled HTML for 'html' property", () => {
       expect(loaded.html).toBe(
-        "<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n<pre><code class=\"language-js\">const multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
+        "<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n<pre><code class=\"language-js\">const templateLiteral = `ok`;\nconst multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
       );
     });
 
@@ -85,7 +85,7 @@ describe("frontmatter-markdown-loader", () => {
     it("returns HTML with configured markdownIt: breaks option is enabled as configuration", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { markdownIt: { breaks: true } } });
       expect(loaded.html).toBe(
-        "<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND<br>\nCHEERS</p>\n<pre><code class=\"language-js\">const multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
+        "<h1>Title</h1>\n<p>GOOD <code>BYE</code> FRIEND<br>\nCHEERS</p>\n<pre><code class=\"language-js\">const templateLiteral = `ok`;\nconst multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
       )
     });
 
@@ -101,7 +101,7 @@ describe("frontmatter-markdown-loader", () => {
 
       load(markdownWithFrontmatter, { ...defaultContext, query: { markdownIt: markdownItInstance } });
       expect(loaded.html).toBe(
-        "<h1>Title</h1>\n<p data-paragraph=\"hello\">GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n<pre><code class=\"language-js\">const multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
+        "<h1>Title</h1>\n<p data-paragraph=\"hello\">GOOD <code>BYE</code> FRIEND\nCHEERS</p>\n<pre><code class=\"language-js\">const templateLiteral = `ok`;\nconst multipleLine = true;\nconsole.warn(multipleLine)\n</code></pre>\n"
       );
     });
   });
@@ -110,7 +110,7 @@ describe("frontmatter-markdown-loader", () => {
     it("returns raw markdown body for 'body' property", () => {
       load(markdownWithFrontmatter, { ...defaultContext, query: { mode: [Mode.BODY] } });
       expect(loaded.body).toBe(
-        "# Title\n\nGOOD `BYE` FRIEND\nCHEERS\n\n```js\nconst multipleLine = true;\nconsole.warn(multipleLine)\n```\n"
+        "# Title\n\nGOOD `BYE` FRIEND\nCHEERS\n\n```js\nconst templateLiteral = `ok`;\nconst multipleLine = true;\nconsole.warn(multipleLine)\n```\n"
       );
     });
   });
