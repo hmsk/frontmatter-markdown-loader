@@ -12,5 +12,5 @@ CHEERS
 ```js
 const templateLiteral = `ok`;
 const multipleLine = true;
-console.warn(multipleLine)
+console.warn(multipleLine + "\n")
 ```

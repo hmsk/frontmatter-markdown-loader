@@ -25,7 +25,7 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
         Object {
           "__html": "const templateLiteral = \`ok\`;
 const multipleLine = true;
-console.warn(multipleLine)
+console.warn(multipleLine + &quot;\\\\n&quot;)
 ",
         }
       }
@@ -86,7 +86,7 @@ exports[`frontmatter-markdown-loader react mode returns renderable React compone
         Object {
           "__html": "const templateLiteral = \`ok\`;
 const multipleLine = true;
-console.warn(multipleLine)
+console.warn(multipleLine + &quot;\\\\n&quot;)
 ",
         }
       }
