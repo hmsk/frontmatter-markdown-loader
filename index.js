@@ -145,11 +145,12 @@ module.exports = function (source) {
 
     addPrepend(`const React = require('react')`);
 
+    const escape = (str) => str.replace(/([\\`])/g, "\\$1");
+
     const template = fm
       .html
-      .replace(/(?<=<code(\s[^>]+)?>.*)`(?=.*<\/code>)/sg, "\\`")
-      .replace(/<code(\s[^>]+)>(.+?)<\/code>/sg, "<code$1 dangerouslySetInnerHTML={{ __html: `$2`}} />")
-      .replace(/<code>(.+?)<\/code>/sg, "<code dangerouslySetInnerHTML={{ __html: `$1`}} />")
+      .replace(/<code(\s[^>]+)>(.+?)<\/code>/sg, (match, p1, p2) => `<code${p1} dangerouslySetInnerHTML={{ __html: \`${escape(p2)}\`}} />`)
+      .replace(/<code>(.+?)<\/code>/sg, (match, p1) => `<code dangerouslySetInnerHTML={{ __html: \`${escape(p1)}\`}} />`)
       .replace(/<(code|pre)([^\s>]*)\sclass=([^>]+)>/g, "<$1$2 className=$3>")
 
     const compiled = babelCore
