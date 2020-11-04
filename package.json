@@ -40,7 +40,7 @@
     "@vue/babel-preset-app": "4.5.7",
     "@vue/component-compiler-utils": "3.2.0",
     "@vue/test-utils": "1.1.0",
-    "jest": "26.6.0",
+    "jest": "26.6.3",
     "node-eval": "2.0.0",
     "react": "17.0.0",
     "react-test-renderer": "17.0.0",
