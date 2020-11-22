@@ -1,9 +1,16 @@
 import fm from './something.md'
 
-function component() {
+const html = () => {
   const element = document.createElement('div');
   element.innerHTML = fm.html
   return element;
 }
 
-document.body.appendChild(component());
+const attributes = () => {
+  const attributes = document.createElement('pre');
+  attributes.innerText = JSON.stringify(fm.attributes);
+  return attributes;
+}
+
+document.body.appendChild(html());
+document.body.appendChild(attributes());
