@@ -3,6 +3,12 @@
   "version": "3.6.1",
   "description": "Webpack loader for Front Matter Markdown file to get front matter attributes, compiled markdown and React/Vue component which renders compiled markdown",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "mode.js",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
