@@ -51,7 +51,7 @@
     "react": "17.0.1",
     "react-test-renderer": "17.0.1",
     "vue": "2.6.12",
-    "vue-jest": "4.0.0",
+    "vue-jest": "4.0.1",
     "vue-template-compiler": "2.6.12",
     "vuepress": "1.8.0"
   },
