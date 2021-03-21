@@ -26,6 +26,13 @@ module.exports = {
         ]
       },
       {
+        title: 'TypeScript',
+        collapsable: false,
+        children: [
+          ['/typescript', 'Type declarations'],
+        ]
+      },
+      {
         title: 'Migration',
         collapsable: false,
         children: [
