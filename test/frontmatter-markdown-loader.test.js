@@ -168,20 +168,33 @@ describe("frontmatter-markdown-loader", () => {
 
         it("throw if vue-template|compiler is not installed in the project", () => {
           jest.mock('vue-template-compiler', () => {
-            throw new Error();
+            const error = new Error()
+            error.code = 'MODULE_NOT_FOUND'
+            throw error
           });
           expect(() => {
             load(markdownWithFrontmatter, contextEnablingVueRenderFunctions());
-          }).toThrow();
+          }).toThrow(/Failed to import/);
         });
 
         it("throw if @vue/component-compiler-utils is not installed in the project", () => {
           jest.mock("@vue/component-compiler-utils", () => {
-            throw new Error();
+            const error = new Error()
+            error.code = 'MODULE_NOT_FOUND'
+            throw error
           });
           expect(() => {
             load(markdownWithFrontmatter, contextEnablingVueRenderFunctions());
-          }).toThrow();
+          }).toThrow(/Failed to import/);
+        });
+
+        it("throw if unintentional exception by importing @vue/component-compiler-utils", () => {
+          jest.mock("@vue/component-compiler-utils", () => {
+            throw new Error('unintentional problem')
+          });
+          expect(() => {
+            load(markdownWithFrontmatter, contextEnablingVueRenderFunctions());
+          }).toThrow('unintentional problem');
         });
       });
 
@@ -243,20 +256,33 @@ describe("frontmatter-markdown-loader", () => {
 
         it("throw if vue-template|compiler is not installed in the project", () => {
           jest.mock('vue-template-compiler', () => {
-            throw new Error();
+            const error = new Error()
+            error.code = 'MODULE_NOT_FOUND'
+            throw error
           });
           expect(() => {
             load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
-          }).toThrow();
+          }).toThrow(/Failed to import/);
         });
 
         it("throw if @vue/component-compiler-utils is not installed in the project", () => {
           jest.mock("@vue/component-compiler-utils", () => {
-            throw new Error();
+            const error = new Error()
+            error.code = 'MODULE_NOT_FOUND'
+            throw error
           });
           expect(() => {
             load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
-          }).toThrow();
+          }).toThrow(/Failed to import/);
+        });
+
+        it("throw if unintentional exception by importing @vue/component-compiler-utils", () => {
+          jest.mock("@vue/component-compiler-utils", () => {
+            throw new Error('unintentional problem')
+          });
+          expect(() => {
+            load(markdownWithFrontmatterIncludingChildComponent, contextEnablingVueComponent());
+          }).toThrow('unintentional problem');
         });
       });
 

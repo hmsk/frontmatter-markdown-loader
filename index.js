@@ -70,11 +70,15 @@ module.exports = function (source) {
       vueCompiler = require('vue-template-compiler')
       compileVueTemplate = require('@vue/component-compiler-utils').compileTemplate
     } catch (err) {
-      throw new Error(
-        "Failed to import vue-template-compiler or/and @vue/component-compiler-utils: \n" +
-        "If you intend to use 'vue-component', `vue-render-functions` mode, install both to your project: \n" +
-        "https://hmsk.github.io/frontmatter-markdown-loader/vue.html"
-      );
+      if (err.code === "MODULE_NOT_FOUND") {
+        throw new Error(
+          "Failed to import vue-template-compiler or/and @vue/component-compiler-utils: \n" +
+            "If you intend to use 'vue-component', `vue-render-functions` mode, install both to your project: \n" +
+            "https://hmsk.github.io/frontmatter-markdown-loader/vue.html"
+        );
+      } else {
+        throw err;
+      }
     }
 
     const vueRootClass = options.vue && options.vue.root ? options.vue.root : 'frontmatter-markdown';
