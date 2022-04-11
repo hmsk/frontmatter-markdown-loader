@@ -37,7 +37,7 @@
   "dependencies": {
     "front-matter": "^4.0.0",
     "loader-utils": "^2.0.0",
-    "markdown-it": "^11.0.0"
+    "markdown-it": "^12.3.2"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",
