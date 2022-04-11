@@ -11,7 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "frontmatter-markdown-loader": "file:../",
-    "webpack": "5.42.1",
+    "webpack": "5.72.0",
     "webpack-cli": "4.9.2"
   }
 }
