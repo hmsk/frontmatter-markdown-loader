@@ -11,10 +11,7 @@
   ],
   "scripts": {
     "test": "jest --clearCache && jest --forceExit --detectOpenHandles",
-    "test:watch": "jest --watchAll",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "docs:deploy": "./docs/deploy.sh"
+    "test:watch": "jest --watchAll"
   },
   "repository": {
     "type": "git",
@@ -52,8 +49,7 @@
     "react": "18.0.0",
     "react-test-renderer": "18.0.0",
     "vue": "2.6.14",
-    "vue-template-compiler": "2.6.14",
-    "vuepress": "1.9.7"
+    "vue-template-compiler": "2.6.14"
   },
   "jest": {
     "testEnvironment": "jsdom",

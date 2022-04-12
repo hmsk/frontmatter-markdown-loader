@@ -1,0 +1,16 @@
+{
+  "name": "frontmatter-markdown-loader-docs",
+  "version": "3.7.0",
+  "description": "VuePress doc for frontmatter-markdown-loader",
+  "scripts": {
+    "dev": "vuepress dev .",
+    "build": "vuepress build .",
+    "deploy": "./deploy.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kengo Hamasaki <k.hamasaki@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "1.9.7"
+  }
+}
