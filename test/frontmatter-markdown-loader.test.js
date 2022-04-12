@@ -1,22 +1,23 @@
-import { mount, createLocalVue } from "@vue/test-utils";
-import reactRenderer from 'react-test-renderer';
-import React from 'react';
+import { createLocalVue, mount } from "@vue/test-utils";
 import fs from "fs";
-import path from "path";
-
 import markdownIt from "markdown-it";
 import nodeEval from "node-eval";
-
+import path from "path";
+import React from 'react';
+import reactRenderer from 'react-test-renderer';
 import Loader from "../index";
 import Mode from "../mode";
 import ChildComponent from "./child-component";
 import CodeConfusing from "./code-confusing";
 
+
+
 let loaded;
 
 const defaultContext = {
   cachable: false,
-  resourcePath: "/somewhere/frontmatter.md"
+  resourcePath: "/somewhere/frontmatter.md",
+  getOptions() { return this.query || {} }
 };
 
 const load = (source, context = defaultContext) => {

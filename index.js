@@ -1,4 +1,3 @@
-const loaderUtils = require('loader-utils')
 const frontmatter = require('front-matter')
 const Mode = require('./mode')
 const markdownIt = require('markdown-it');
@@ -36,7 +35,7 @@ function getNormalizedMarkdownCompiler (options, isReactEnabled) {
 module.exports = function (source) {
   if (this.cacheable) this.cacheable();
 
-  const options = loaderUtils.getOptions(this);
+  const options = this.getOptions();
   const requestedMode = Array.isArray(options.mode) ? options.mode : [Mode.HTML];
   const enabled = (mode) => requestedMode.includes(mode);
 
