@@ -36,9 +36,9 @@
     "markdown-it": "^12.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.9",
-    "@babel/preset-env": "7.16.11",
-    "@babel/preset-react": "7.16.7",
+    "@babel/core": "7.25.9",
+    "@babel/preset-env": "7.25.9",
+    "@babel/preset-react": "7.25.9",
     "@vue/babel-preset-app": "4.5.17",
     "@vue/component-compiler-utils": "3.3.0",
     "@vue/test-utils": "1.3.0",
