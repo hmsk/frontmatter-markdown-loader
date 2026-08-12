@@ -11,6 +11,6 @@
   "author": "Kengo Hamasaki <k.hamasaki@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "vuepress": "1.9.7"
+    "vuepress": "1.9.10"
   }
 }
